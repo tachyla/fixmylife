@@ -5,8 +5,7 @@
   "main": "config.js",
   "scripts": {
     "test": "mocha",
-    "start": "node server.js",
-    "heroku-postbuild":"node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",

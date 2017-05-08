@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 mongoose.connect(process.env.DATABASE_URL);
 
-app.get('/', (req, res) => {
+app.get('/adviceEntry', (req, res) => {
     //writes hello world
   res.send('hello world!'); 
 });
