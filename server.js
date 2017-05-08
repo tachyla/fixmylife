@@ -8,6 +8,7 @@ app.use(bodyParser.json());
 mongoose.connect(DATABASE_URL);
 
 app.get('/', (req, res) => {
+    //writes hello world
     res.send('hello world!'); 
 });
 
