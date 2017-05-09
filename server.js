@@ -37,11 +37,18 @@ app.get('/item/:id', (req, res) => {
 });
 
 app.post('/item', (req, res) => {
+  // const requiredFields = ['author', 'title', 'content'];
+  // for(let i = 0; i < requiredFields.length; i++) {
+  //   const require = requiredFields[i];
+  //   if(!(require in req.body)) {
+  //     res.status(400).send(`Missing ${require} field.`);
+  //   }
+  // }
   AdviceEntry.create({
     content: req.body.content
   })
     .then(entry => {
-      res.json(entry);
+      res.status().json(entry);
     })
     .catch(err => {
       console.error(err);
@@ -50,7 +57,7 @@ app.post('/item', (req, res) => {
 });
 
 app.put('/item/:id', (req, res) => {
-const requiredFields = ['author', 'title', 'content'];
+  const requiredFields = ['author', 'title', 'content'];
 
   for(let i = 0; i < requiredFields.length; i++) {
     const require = requiredFields[i];
