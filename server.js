@@ -69,7 +69,7 @@ app.delete('/add/:id', (req, res) => {
 
 let server;
 
-function runServer(databaseUrl=DATABASE_URL, port=PORT) {
+function runServer(databaseUrl, port) {
   return new Promise((resolve, reject) => {
     mongoose.createConnection(databaseUrl, err => {
       if (err) {
@@ -102,11 +102,7 @@ function closeServer() {
 }
 
 if (require.main === module) {
-  runServer(function(err) {
-    if (err) {
-      console.error(err);
-    }
-  });
+  runServer(DATABASE_URL, PORT).catch((err) => {console.log(err)});
 }
 
 module.exports = {runServer, app, closeServer};
