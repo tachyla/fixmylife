@@ -18,6 +18,7 @@ app.get('/item', (req, res) => {
     })
     .catch(err => {
       console.error(err);
+      res.sendStatus(500);
     });
 });
 
@@ -29,6 +30,7 @@ app.get('/item/:id', (req, res) => {
     })
     .catch(err => {
       console.error(err);
+      res.sendStatus(500);
     });
 });
 
@@ -41,6 +43,7 @@ app.post('/item', (req, res) => {
     })
     .catch(err => {
       console.error(err);
+      res.sendStatus(500);
     });
 });
 
@@ -60,6 +63,7 @@ app.put('/item/:id', (req, res) => {
     })
     .catch(err => {
       console.error(err);
+      res.sendStatus(500);
     });
 });
 
@@ -71,6 +75,7 @@ app.delete('/item/:id', (req, res) => {
     })
     .catch(err => {
       console.error(err);
+      res.sendStatus(500);
     });
 });
 

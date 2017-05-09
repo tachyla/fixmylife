@@ -10,8 +10,8 @@ chai.should();
 
 //REQUIRE model schema called {BlogPost} from models.js
 // const { BlogPost } = require('../models');
-const { app, runServer, closeServer } = require('../server');
-const { DATABASE_URL } = require('../config');
+const { runServer, closeServer } = require('../server');
+const { PORT, DATABASE_URL } = require('../config');
 
 //initialize Chai
 chai.use(chaiHttp);
@@ -20,16 +20,16 @@ chai.use(chaiHttp);
 
 
 
-function tearDownDb() {
-  console.warn('Deleting database');
-  return mongoose.connection.dropDatabase();
-}
+// function tearDownDb() {
+//   console.warn('Deleting database');
+//   return mongoose.connection.dropDatabase();
+// }
 
 //PARENT DESCRIBE Function
 describe('BlogPost API resource', function () {
 
   before(function () {
-    return runServer(DATABASE_URL);
+    return runServer(DATABASE_URL, PORT);
   });
 
   beforeEach(function () {
@@ -50,13 +50,13 @@ describe('BlogPost API resource', function () {
   describe('GET endpoint', function () {
 
     it('should be true', function () {
-        var foo = true;
-        foo.should.be.true;
+      var foo = true;
+      foo.should.be.true;
     });
 
 
   });
- 
+
 
 });
 
