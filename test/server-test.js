@@ -1,17 +1,17 @@
-//'use: strict'
-//require all packages
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-// const faker = require('faker');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+
 mongoose.Promise = global.Promise;
 
 chai.should();
 
 //REQUIRE model schema called {BlogPost} from models.js
 // const { BlogPost } = require('../models');
-const { runServer, closeServer } = require('../server');
-const { PORT, DATABASE_URL } = require('../config');
+const { app, runServer, closeServer } = require('../server');
+const { DATABASE_URL, PORT } = require('../config');
 
 //initialize Chai
 chai.use(chaiHttp);
@@ -20,10 +20,10 @@ chai.use(chaiHttp);
 
 
 
-// function tearDownDb() {
-//   console.warn('Deleting database');
-//   return mongoose.connection.dropDatabase();
-// }
+function tearDownDb() {
+  console.warn('Deleting database');
+  return mongoose.connection.dropDatabase();
+}
 
 //PARENT DESCRIBE Function
 describe('BlogPost API resource', function () {
@@ -49,14 +49,28 @@ describe('BlogPost API resource', function () {
 
   describe('GET endpoint', function () {
 
-    it('should be true', function () {
-      var foo = true;
-      foo.should.be.true;
+    it('should display all existing items', function () {
+        let res;
+
+        return chai.request(app)
+        .get('/item')
+        .then(results => {
+            res = results; 
+            res.should.have.status(200);
+            res.should.be.json;
+
+            res.body.forEach(function(result) {
+                result.should.be.a('object');
+                result.should.include.keys('author', 'content', 'title');
+          });
+
+            (res.body).should.to.include.keys('author');
+        })
     });
 
 
   });
-
+ 
 
 });
 
