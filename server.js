@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 mongoose.connect(DATABASE_URL);
 app.use(logger('combined'));
 
-app.get('/add', (req, res) => {
+app.get('/item', (req, res) => {
   AdviceEntry
   .find()
   .then(entry => {
@@ -20,7 +20,7 @@ app.get('/add', (req, res) => {
   });
 });
 
-app.get('/add/:id', (req, res) => {
+app.get('/item/:id', (req, res) => {
   AdviceEntry
   .findById(req.params.id)
   .exec()
@@ -29,7 +29,7 @@ app.get('/add/:id', (req, res) => {
   });
 });
 
-app.post('/add', (req, res) => {
+app.post('/item', (req, res) => {
   AdviceEntry
   .create({
     content: req.body.content
@@ -42,7 +42,7 @@ app.post('/add', (req, res) => {
   });
 });
 
-app.put('/add/:id', (req, res) => {
+app.put('/item/:id', (req, res) => {
   AdviceEntry
     .findByIdAndUpdate(req.params.id, {$set: {title: req.body.title, content: req.body.content, author: req.body.author}, new: true})
     .exec()
@@ -52,7 +52,7 @@ app.put('/add/:id', (req, res) => {
     });
 });
 
-app.delete('/add/:id', (req, res) => {
+app.delete('/item/:id', (req, res) => {
   AdviceEntry
   .findByIdAndRemove(req.params.id)
   .exec()
