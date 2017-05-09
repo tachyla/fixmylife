@@ -20,5 +20,10 @@
     "passport-http": "^0.3.0"
   },
   "author": "Tee & TaChyla",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "chai-http": "^3.0.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0"
+  }
 }
