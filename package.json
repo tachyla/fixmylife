@@ -17,8 +17,7 @@
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-http": "^0.3.0"
-},
-
+  },
   "author": "Tee & TaChyla",
   "license": "ISC"
 }
