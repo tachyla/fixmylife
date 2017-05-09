@@ -12,6 +12,7 @@ chai.should();
 // const { BlogPost } = require('../models');
 const { app, runServer, closeServer } = require('../server');
 const { DATABASE_URL, PORT } = require('../config');
+const {AdviceEntry} = require('../models');
 
 //initialize Chai
 chai.use(chaiHttp);
@@ -50,27 +51,29 @@ describe('BlogPost API resource', function () {
   describe('GET endpoint', function () {
 
     it('should display all existing items', function () {
-        let res;
+      let res;
 
-        return chai.request(app)
+      return chai.request(app)
         .get('/item')
         .then(results => {
-            res = results; 
-            res.should.have.status(200);
-            res.should.be.json;
+          res = results; 
+          res.should.have.status(200);
+          res.should.be.json;
 
-            res.body.forEach(function(result) {
-                result.should.be.a('object');
-                result.should.include.keys('author', 'content', 'title');
+          res.body.forEach(function(result) {
+            result.should.be.a('object');
+            result.should.have.any.keys('author', 'content', 'title');
           });
-
-            (res.body).should.to.include.keys('author');
+          
+          return AdviceEntry.count();
         })
+        .then(count => {
+          res.body.should.have.length.of(count);
+        });
     });
-
-
   });
- 
 
 });
+ 
+
 

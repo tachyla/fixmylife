@@ -12,7 +12,9 @@ mongoose.connect(DATABASE_URL);
 app.use(logger('combined'));
 
 app.get('/item', (req, res) => {
-  AdviceEntry.find()
+
+  AdviceEntry
+  .find()
     .then(entry => {
       res.json(entry);
     })
@@ -48,6 +50,15 @@ app.post('/item', (req, res) => {
 });
 
 app.put('/item/:id', (req, res) => {
+const requiredFields = ['author', 'title', 'content'];
+
+  for(let i = 0; i < requiredFields.length; i++) {
+    const require = requiredFields[i];
+    if(!(require in req.body)) {
+      res.status(400).send(`Missing ${require} field.`);
+    }
+  }
+
   AdviceEntry.findByIdAndUpdate(req.params.id, {
     $set: {
       title: req.body.title,
