@@ -60,16 +60,32 @@ describe('BlogPost API resource', function () {
           res.should.have.status(200);
           res.should.be.json;
 
-          res.body.forEach(function(result) {
-            result.should.be.a('object');
-            result.should.have.any.keys('author', 'content', 'title');
-          });
-          
           return AdviceEntry.count();
         })
         .then(count => {
           res.body.should.have.length.of(count);
         });
+    });
+
+    it('each item should display the correct keys', function() {
+        let res; 
+        return chai.request(app)
+        .get('/item')
+        .then(results => {
+            res = results; 
+          res.should.have.status(200);
+          res.should.be.json;
+
+          res.body.forEach(function(result) {
+            result.should.be.a('object');
+            result.should.have.any.keys('author', 'content', 'title');
+          });
+           return AdviceEntry.count();
+        })
+        .then(count => {
+          res.body.should.have.length.of(count);
+        });
+          
     });
   });
 
