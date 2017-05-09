@@ -2,10 +2,11 @@
   "name": "fixmylife",
   "version": "1.0.0",
   "description": "",
-  "main": "config.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha",
-    "start": "node server.js"
+    "start": "node server.js",
+    "nodemon": "nodemon server.js"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
@@ -13,7 +14,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.12.4",
     "mongoose": "^4.7.1",
-    "morgan": "^1.7.0",
+    "morgan": "^1.8.1",
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-http": "^0.3.0"
