@@ -2,9 +2,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const apiRoute = require('./config');
 const { DATABASE_URL, PORT } = require('./config');
-const {AdviceEntry} = require('./models');
+const { AdviceEntry } = require('./models');
 mongoose.Promise = global.Promise;
 
 const app = express();
@@ -13,59 +12,67 @@ mongoose.connect(DATABASE_URL);
 app.use(logger('combined'));
 
 app.get('/item', (req, res) => {
-  AdviceEntry
-  .find()
-  .then(entry => {
-    res.json(entry);
-  });
+  AdviceEntry.find()
+    .then(entry => {
+      res.json(entry);
+    })
+    .catch(err => {
+      console.error(err);
+    });
 });
 
 app.get('/item/:id', (req, res) => {
-  AdviceEntry
-  .findById(req.params.id)
-  .exec()
-  .then( result => {
-    res.json(result);
-  });
+  AdviceEntry.findById(req.params.id)
+    .exec()
+    .then(result => {
+      res.json(result);
+    })
+    .catch(err => {
+      console.error(err);
+    });
 });
 
 app.post('/item', (req, res) => {
-  AdviceEntry
-  .create({
+  AdviceEntry.create({
     content: req.body.content
   })
-  .then(entry => {
-    res.json(entry);
-  })
-  .catch(err => {
-    console.error(err);
-  });
+    .then(entry => {
+      res.json(entry);
+    })
+    .catch(err => {
+      console.error(err);
+    });
 });
 
 app.put('/item/:id', (req, res) => {
-  AdviceEntry
-    .findByIdAndUpdate(req.params.id, {$set: {title: req.body.title, content: req.body.content, author: req.body.author}, new: true})
+  AdviceEntry.findByIdAndUpdate(req.params.id, {
+    $set: {
+      title: req.body.title,
+      content: req.body.content,
+      author: req.body.author
+    },
+    new: true
+  })
     .exec()
-    .then( updated => {
+    .then(updated => {
       console.log(updated);
       res.json(updated);
+    })
+    .catch(err => {
+      console.error(err);
     });
 });
 
 app.delete('/item/:id', (req, res) => {
-  AdviceEntry
-  .findByIdAndRemove(req.params.id)
-  .exec()
-  .then( () => {
-    res.sendStatus(204);
-  });
+  AdviceEntry.findByIdAndRemove(req.params.id)
+    .exec()
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(err => {
+      console.error(err);
+    });
 });
-
-
-
-// app.listen(PORT, function(){
-//   console.log(`Listening on port ${PORT}`);
-// });
 
 let server;
 
@@ -75,14 +82,15 @@ function runServer(databaseUrl, port) {
       if (err) {
         return reject(err);
       }
-      server = app.listen(port, () => {
-        console.log(`Your app is listening on port ${port}`);
-        resolve();
-      })
-      .on('error', err => {
-        mongoose.disconnect();
-        reject(err);
-      });
+      server = app
+        .listen(port, () => {
+          console.log(`Your app is listening on port ${port}`);
+          resolve();
+        })
+        .on('error', err => {
+          mongoose.disconnect();
+          reject(err);
+        });
     });
   });
 }
@@ -102,7 +110,9 @@ function closeServer() {
 }
 
 if (require.main === module) {
-  runServer(DATABASE_URL, PORT).catch((err) => {console.log(err)});
+  runServer(DATABASE_URL, PORT).catch(err => {
+    console.log(err);
+  });
 }
 
-module.exports = {runServer, app, closeServer};
+module.exports = { runServer, app, closeServer };
