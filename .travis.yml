@@ -1,4 +1,11 @@
 language: node_js
-node_js: node 
+node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: WnGmw/uH+Puxsc4PMNlT40FBalX8WM2+KJUb0Q0v+8oecmTCPk+NyN4ICF/o3B5Gy+gfTYxn850lgZ/d7xW77TUd/m55OiZiOsjEJdVniRpH/7lMQoP9dRlsHsu6ZW2f5sR6kUZSugghyw6mm2kwZ8coPMLh8/KWcJbtbymwG7Y7zvCZD0Vol/4d/sSeLWiLAeczsqNS65p3/D6YkmBZmIfcOI84X5qMrSrA5tNdDm5IAI/8dzYpCXW2hFdnhfnwYYuaFMuOz41Jf/d0KqE3DCnxKqD2cnZAtV0Bs3ddNCqijKzQF7sR68GRULZrD24MdDW0zKWj2Yr0q5e1fK2BKop8ehUpYwLZd4mT9JcfOoHjgPdTuO1lbqFFp5FJqGgSQjRB+6Y+vhbYrCBmGUqFbB1gVI0l/C1djChXF+8fr4XZJ1xLcPXW2jziOPzsC4s0BGE2WQhFR1m23EwIsjB/89XsroM1BgwjsWdwou7NxEP9TuYh6uCzA9L3sseOV80eO5LJHTxrSBZot1NSOHy4+b72rQjeiqegVcWMsA2hSuo01hIJLtfIPesyKqpDBt5DtACVBJg6rldJxPgucL2KN8ATXWWsnFKfEMOmzRjE1b33LgSYZPzdQSVzAa+hgF0e69i1fKgW+vZ/4UWZPenkGaJuim8s0+yEueEyhEnypwY=
+  app: warm-castle-56131
+  on:
+    repo: tachyla/fixmylife
