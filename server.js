@@ -11,8 +11,10 @@ app.use(logger('combined'));
 app.use(express.static('public'));
 
 //route endpoints
-const router = require('./routes/routes');
-app.use(router);
+const login = require('./routes/login');
+const user = require('./routes/user');
+app.use(login);
+app.use(user);
 
 //Server functions
 let server;

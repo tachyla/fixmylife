@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const path = require('path');
 
-router.get('/', (req, res) => {
-  res.sendFile('index.html');
+router.get('/user', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/user.html'));
 });
 
 router.get('/item', (req, res) => {

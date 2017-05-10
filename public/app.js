@@ -1,8 +1,9 @@
 console.log('hello');
 
+const data = AdviceEntry.find();
 
 function getItems() {
-  $('.container').append('This is where the data will show.');
+  $('.container').append(data);
 }
 
 getItems();
