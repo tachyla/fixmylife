@@ -3,6 +3,7 @@ const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 const jsonParser = require('body-parser').json();
 mongoose.Promise = global.Promise;
+const faker = require('faker');
 const should = chai.should();
 //REQUIRE model schema called {BlogPost} from models.js
 // const { BlogPost } = require('../models');
@@ -20,6 +21,18 @@ function tearDownDb() {
   return mongoose.connection.dropDatabase();
 }
 
+function seedAdviceEntryData() {
+  console.info('Seeding AdviceEntry Data');
+  const seedData = [];
+  for(let i = 1; i < 10; i++) {
+    seedData.push(generateAdviceEntryData());
+  }
+  return AdviceEntry.insertMany(seedData);
+}
+function generateAdviceEntryData() {
+  return { author: faker.name(), title: faker.lorem.sentence(), content: faker.lorem.sentence() };
+}
+
 //PARENT DESCRIBE Function
 describe('AdviceEntry API resource unit tests', function() {
   before(function() {
@@ -27,11 +40,11 @@ describe('AdviceEntry API resource unit tests', function() {
   });
 
   beforeEach(function() {
-    //return seedBlogPostData();
+    return seedAdviceEntryData();
   });
 
   afterEach(function() {
-    // return tearDownDb();
+    return tearDownDb();
   });
 
   after(function() {

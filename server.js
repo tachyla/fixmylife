@@ -8,6 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 mongoose.connect(DATABASE_URL);
 app.use(logger('combined'));
+
 app.use(express.static('public'));
 
 //route endpoints
