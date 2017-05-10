@@ -73,7 +73,8 @@ app.put('/item/:id', (req, res) => {
     }
   }
 
-  AdviceEntry.findByIdAndUpdate(req.params.id, {
+  AdviceEntry
+  .findByIdAndUpdate(req.params.id, {
     $set: {
       title: req.body.title,
       content: req.body.content,
@@ -84,7 +85,7 @@ app.put('/item/:id', (req, res) => {
     .exec()
     .then(updated => {
       console.log(updated);
-      res.json(updated);
+      res.status(200).json(updated);
     })
     .catch(err => {
       console.error(err);

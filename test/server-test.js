@@ -104,6 +104,7 @@ describe('AdviceEntry API resource', function() {
         res.body.author.should.equal(newEntry.author);
         res.body.title.should.equal(newEntry.title);
         res.body.content.should.equal(newEntry.content);
+
         return AdviceEntry.findById(res.body._id).exec();
       })
       .then(function(entry) {
@@ -111,6 +112,42 @@ describe('AdviceEntry API resource', function() {
         entry.title.should.equal(newEntry.title);
         entry.content.should.equal(newEntry.content);
       });
+    });
+  });
+
+  describe('PUT endpoint', function(){
+    it('should update an entry', function(){
+      const updateEntry = {
+        'author': 'UPDATED AUTHOR',
+        'title': 'UPDATED TITLE',
+        'content': 'TEST UPDAT TEST UPDATE TEST UPDATE TEST UPDATE TEST UPDATE '
+      };
+      return AdviceEntry
+        .findOne()
+        .exec()
+        .then(entry => {
+          updateEntry._id = entry._id;
+
+          return chai.request(app)
+            .put(`/item/${entry._id}`)
+            .send(updateEntry)
+        })
+        .then(res => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.author.should.equal(updateEntry.author);
+          res.body.title.should.equal(updateEntry.title);
+          res.body.content.should.equal(updateEntry.content);
+
+          return AdviceEntry.findById(res.body._id).exec();
+        })
+        .then(entry => {
+          entry.author.should.equal(updateEntry.author);
+          entry.title.should.equal(updateEntry.title);
+          entry.content.should.equal(updateEntry.content);
+        });
+
     });
   });
 
