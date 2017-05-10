@@ -78,7 +78,7 @@ router.put('/item/:id', (req, res) => {
     .exec()
     .then(updated => {
       console.log(updated);
-      res.status(200).json(updated);
+      res.status(201).json(updated);
     })
     .catch(err => {
       console.error(err);
