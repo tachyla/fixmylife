@@ -5,11 +5,11 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const path = require('path');
 
-router.get('/user', (req, res) => {
+router.get('/users', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/user.html'));
 });
 
-router.get('/item', (req, res) => {
+router.get('/items', (req, res) => {
   AdviceEntry.find()
     .then(entry => {
       res.json(entry);
@@ -20,7 +20,7 @@ router.get('/item', (req, res) => {
     });
 });
 
-router.get('/item/:id', (req, res) => {
+router.get('/items/:id', (req, res) => {
   AdviceEntry.findById(req.params.id)
     .exec()
     .then(result => {
@@ -32,7 +32,7 @@ router.get('/item/:id', (req, res) => {
     });
 });
 
-router.post('/item', (req, res) => {
+router.post('/items', (req, res) => {
   const requiredFields = ['author', 'title', 'content'];
 
   for (let i = 0; i < requiredFields.length; i++) {
@@ -57,7 +57,7 @@ router.post('/item', (req, res) => {
     });
 });
 
-router.put('/item/:id', (req, res) => {
+router.put('/items/:id', (req, res) => {
   const requiredFields = ['author', 'title', 'content'];
 
   for (let i = 0; i < requiredFields.length; i++) {
@@ -86,7 +86,7 @@ router.put('/item/:id', (req, res) => {
     });
 });
 
-router.delete('/item/:id', (req, res) => {
+router.delete('/items/:id', (req, res) => {
   AdviceEntry.findByIdAndRemove(req.params.id).exec().then( () => {
     res.status(204).end();
   });

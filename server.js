@@ -2,7 +2,11 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+var fetch = require('node-fetch');
+
 const { DATABASE_URL, PORT } = require('./config');
+const { AdviceEntry } = require('./models');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -21,6 +25,27 @@ const login = require('./routes/login');
 const user = require('./routes/user');
 app.use(login);
 app.use(user);
+
+fetch('https://reddit.com/r/relationships.json?limit=10')
+    .then(function(res) {
+      return res.json();
+    })
+    .then(function(json) {
+      for(let i = 0; i < 10; i ++) {
+        const question = json.data.children[i].data.selftext;
+        const author = json.data.children[i].data.author;
+        const title = json.data.children[i].data.title;
+        AdviceEntry
+          .create({
+            author: author,
+            title: title,
+            content: question
+          });
+      }
+    });
+      
+  
+
 
 //Server functions
 let server;

@@ -1,14 +1,17 @@
+// function getQuestions() {
+//   $.getJSON('https://reddit.com/r/relationships.json?limit=10', function(results) {
+  
+//     for(let i = 0; i < 10; i ++) {
+//       const question = results.data.children[i].data.selftext;
+//       const htmlString = `<a href="#"><li>${question}</li><a/><br>`;
 
-
-$.getJSON('https://reddit.com/r/relationships.json?limit=10', function(results) {
+//       // AdviceEntry
+//       //   .insert(question);
+//       $('.questions').append(htmlString);
+//     }
+//   });
+// }
  
-  for(let i = 0; i < 10; i ++) {
-    const question = results.data.children[i].data.selftext;
-    const htmlString = `<a href="#"><li>${question}</li><a/><br>`;
-    $('.questions').append(htmlString);
-  }
-  //console.log(results.data.children[0].data.selftext);
-});
 
 // $.getJSON(
 //         "http://www.reddit.com/r/pics.json?jsonp=?",
@@ -32,3 +35,4 @@ $.getJSON('https://reddit.com/r/relationships.json?limit=10', function(results) 
 // }
 
 // getItems();
+

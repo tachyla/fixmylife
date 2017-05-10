@@ -57,7 +57,7 @@ describe('AdviceEntry API resource unit tests', function() {
 
       return chai
         .request(app)
-        .get('/item')
+        .get('/items')
         .then(results => {
           res = results;
           res.should.have.status(200);
@@ -74,7 +74,7 @@ describe('AdviceEntry API resource unit tests', function() {
       let res;
       return chai
         .request(app)
-        .get('/item')
+        .get('/items')
         .then(results => {
           res = results;
           res.should.have.status(200);
@@ -109,7 +109,7 @@ describe('AdviceEntry API resource unit tests', function() {
 
       return chai
         .request(app)
-        .post('/item')
+        .post('/items')
         .send(newEntry)
         .then(function(res) {
           res.should.have.status(201);
@@ -156,7 +156,7 @@ describe('AdviceEntry API resource unit tests', function() {
             //console.log('This is the original entry in database:', original);
             return chai
               .request(app)
-              .put(`/item/${entry._id}`)
+              .put(`/items/${entry._id}`)
               .send(updateEntry);
           })
           .then(res => {
@@ -195,7 +195,7 @@ describe('AdviceEntry API resource unit tests', function() {
         .exec()
         .then(_entry => {
           entry = _entry;
-          return chai.request(app).delete(`/item/${entry._id}`);
+          return chai.request(app).delete(`/items/${entry._id}`);
         })
         .then(res => {
           res.should.have.status(204);
