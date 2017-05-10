@@ -1,12 +1,28 @@
-const appState = {
-    
+
+    $.getJSON('/items', function(results){
+
+      for(let i = 0; i < 10; i ++) {
+        const question = results[i].content;
+        console.log(question);
+
+        const htmlString = `<a href="#"><li>${question}</li><a/><br>`;      
+        $('.question').append(htmlString);
+      }
+    });
     //will contain questions
-    //will contain comments
+    //will contain author
     //will contain title
     //will contain comments
 
     
-};
+
+
+//function getData(question) {
+  //Need to get data from DB
+
+  //Append to question UL  
+  //let html = `<li>${question}</li>`;
+ //// $('.question').append(html);
 
 // function getQuestions() {
 //   $.getJSON('https://reddit.com/r/relationships.json?limit=10', function(results) {
