@@ -85,14 +85,15 @@ describe('AdviceEntry API resource', function() {
 
   describe('POST endpoint', function() {
     it('testing for adding entry', function() {
-      let res;
+      let resPost;
+      res = resPost;
       return chai.request(app)
       .post('/item')
       .then( (result)  => {
         res = result;
         res.should.have.status(201);
         res.should.be.json;
-        res.should.have.any.key('_id', '__v', 'author', 'content', 'title');
+        res.should.have.any.keys('_id', '__v', 'author', 'content', 'title');
       });
     });
   });

@@ -37,18 +37,25 @@ app.get('/item/:id', (req, res) => {
 });
 
 app.post('/item', (req, res) => {
-  // const requiredFields = ['author', 'title', 'content'];
-  // for(let i = 0; i < requiredFields.length; i++) {
-  //   const require = requiredFields[i];
-  //   if(!(require in req.body)) {
-  //     res.status(400).send(`Missing ${require} field.`);
-  //   }
-  // }
-  AdviceEntry.create({
-    content: req.body.content
+  const requiredFields = ['author', 'title', 'content'];
+
+  for(let i = 0; i<requiredFields.length; i++) {
+    const require = requiredFields[i];
+    requiredFields.forEach(field => {
+      if (!(field in req.body)) {
+      // res.status(400).json({error: `Missing "${field}" in request body`});
+        res.status(400).send(`Missing ${field} field in request body.`);
+      }
+    });
+  }    
+  AdviceEntry
+    .create({
+            author: req.body.author,
+            title: req.body.title,
+            content: req.body.content
   })
     .then(entry => {
-      res.status().json(entry);
+      res.json(entry);
     })
     .catch(err => {
       console.error(err);
