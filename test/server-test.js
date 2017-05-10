@@ -115,22 +115,23 @@ describe('AdviceEntry API resource', function() {
     });
   });
 
-  describe('PUT endpoint', function(){
-    it('should update an entry', function(){
+  describe.only('PUT endpoint', function(){
+    it('should update an entry by id', function(){
+
       const updateEntry = {
-        'author': 'UPDATED AUTHOR',
-        'title': 'UPDATED TITLE',
-        'content': 'TEST UPDAT TEST UPDATE TEST UPDATE TEST UPDATE TEST UPDATE '
+        'author': 'Updated Author',
+        'title': 'Updated Title',
+        'content': 'Updated Content Updated Content Updated Content Updated Content'
       };
       return AdviceEntry
-        .findOne()
+        .findByIdAndUpdate()
         .exec()
         .then(entry => {
           updateEntry._id = entry._id;
 
           return chai.request(app)
             .put(`/item/${entry._id}`)
-            .send(updateEntry)
+            .send(updateEntry);
         })
         .then(res => {
           res.should.have.status(200);
@@ -149,6 +150,35 @@ describe('AdviceEntry API resource', function() {
         });
 
     });
+  });
+
+
+
+
+  describe('DELETE endpoint', function() {
+    it('should delete an entry by id', function(){
+      let entry;
+
+      return AdviceEntry
+        .findOne()
+        .exec()
+        .then(_entry => {
+          entry = _entry;
+          console.log(entry._id);
+          return chai.request(app)
+            .delete(`/item/${entry._id}`);
+        })
+        .then(res => {
+          res.should.have.status(204);
+          return AdviceEntry.findById(entry._id);
+        })
+        .then(entry => {
+          should.not.exist(entry);
+          done();
+        });
+
+    });
+
   });
 
 });

@@ -89,21 +89,21 @@ app.put('/item/:id', (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500);
     });
 });
 
 app.delete('/item/:id', (req, res) => {
-  AdviceEntry.findByIdAndRemove(req.params.id)
+  AdviceEntry
+    .findByIdAndRemove(req.params.id)
     .exec()
-    .then(() => {
-      res.sendStatus(204);
-    })
-    .catch(err => {
-      console.error(err);
-      res.sendStatus(500);
+    .then(results => {res.status(204).end();
     });
 });
+    // .catch(err => {
+    //   console.error(err);
+    //   res.status(500);
+    // });
 
 let server;
 
