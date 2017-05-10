@@ -21,7 +21,7 @@ function tearDownDb() {
 }
 
 //PARENT DESCRIBE Function
-describe('AdviceEntry API resource', function() {
+describe('AdviceEntry API resource unit tests', function() {
   before(function() {
     return runServer(DATABASE_URL, PORT);
   });
@@ -124,48 +124,53 @@ describe('AdviceEntry API resource', function() {
     });
   });
 
-  describe.only('PUT endpoint', function() {
+  describe.('PUT endpoint test', function() {
     it('should update an entry by id', function() {
       const updateEntry = {
-        author: 'Updated Author',
+        author: 'Bobo',
         title: 'Updated Title',
         content: 'Updated Content Updated Content Updated Content Updated Content'
       };
-      const original = {};
       return AdviceEntry
         .findOne()
         .exec()
         .then(entry => {
-          //console.log('this is what it is finding:', entry);//it only gets the _id: and __v:
+          console.log('this is what it is finding:', entry);//it only gets the _id: and __v: entry is from database
           updateEntry._id = entry._id;
-          original.author = entry.author;
-          original.title = entry.title;
-          original.content = entry.content;
-
+          entry.author = updateEntry.author;
+          entry.title = updateEntry.title;
+          entry.content = updateEntry.content;
+          //console.log('This is the original entry in database:', original);
           return chai.request(app)
           .put(`/item/${entry._id}`)
           .send(updateEntry);
         })
         .then(res => {
+          //res is item from database
           //console.log(res.body);//this is updateEntry with an _id:
           res.should.have.status(201);
           res.should.be.json;
           res.should.be.a('object');
-          //console.log('What what', res.body.author);
-          res.body.author.should.equal(updateEntry._id.author);
-          //res.body.title.should.equal(updateEntry.title);
-          //res.body.content.should.equal(updateEntry.content);
-
-          //return AdviceEntry.findById(res.body._id).exec();
-        //})
-        //.then(entry => {
-          //entry.author.should.equal(updateEntry.author);
-          //entry.title.should.equal(updateEntry.title);
-          //entry.content.should.equal(updateEntry.content);
+          // console.log('What what', res.body.author);
+          res.body.author.should.equal(updateEntry.author);
+          res.body.title.should.equal(updateEntry.title);
+          res.body.content.should.equal(updateEntry.content);
+          //this is the updateEntry object
+          return AdviceEntry.findById(res.body._id).exec();
+        })
+        //entry is updateEntry object
+        .then(entry => {
+          //checks if original id matches updated id
+          //console.log(typeof entry._id);
+          //console.log(typeof updateEntry._id);
+          JSON.stringify(entry._id).should.equal(JSON.stringify(updateEntry._id));
+          //check if database item is updateEntry object
+          entry.author.should.equal(updateEntry.author);
+          entry.title.should.equal(updateEntry.title);
+          entry.content.should.equal(updateEntry.content);
         });
     });
   });
-
   describe('DELETE endpoint', function() {
     it('should delete an entry by id', function() {
       let entry;
@@ -174,7 +179,6 @@ describe('AdviceEntry API resource', function() {
         .exec()
         .then(_entry => {
           entry = _entry;
-          console.log(entry._id);
           return chai.request(app).delete(`/item/${entry._id}`);
         })
         .then(res => {

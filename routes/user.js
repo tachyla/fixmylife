@@ -67,19 +67,19 @@ router.put('/item/:id', (req, res) => {
     }
   }
 
-  AdviceEntry.findByIdAndUpdate(req.params.id, {
-    $set: {
+  AdviceEntry.findByIdAndUpdate(req.params.id,
+    { $set: {
       title: req.body.title,
       content: req.body.content,
       author: req.body.author
-    },
-    new: true
+    }},
+    { new: true }
+  )
+  .exec()
+  .then(updated => {
+      // console.log(updated);
+    res.status(201).json(updated);
   })
-    .exec()
-    .then(updated => {
-      console.log(updated);
-      res.status(201).json(updated);
-    })
     .catch(err => {
       console.error(err);
       res.status(500);
