@@ -3,110 +3,19 @@ const express = require('express');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const { DATABASE_URL, PORT } = require('./config');
-const { AdviceEntry } = require('./models');
-mongoose.Promise = global.Promise;
 
 const app = express();
 app.use(bodyParser.json());
 mongoose.connect(DATABASE_URL);
 app.use(logger('combined'));
+app.use(express.static(__dirname + 'public'));
 
-app.get('/item', (req, res) => {
+//route endpoints
+const router = require('./routes/routes');
+app.use('/', router);
 
-  AdviceEntry
-  .find()
-    .then(entry => {
-      res.json(entry);
-    })
-    .catch(err => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-});
-
-app.get('/item/:id', (req, res) => {
-  AdviceEntry.findById(req.params.id)
-    .exec()
-    .then(result => {
-      res.json(result);
-    })
-    .catch(err => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-});
-
-app.post('/item', (req, res) => {
-  const requiredFields = ['author', 'title', 'content'];
-
-  for(let i = 0; i<requiredFields.length; i++) {
-    const require = requiredFields[i];
-    requiredFields.forEach(field => {
-      if (!(field in req.body)) {
-        res.status(400).json({error: `Missing "${field}" in request body`});
-        // res.status(400).send(`Missing ${field} field in request body.`);
-      }
-    });
-  }    
-  AdviceEntry
-    .create({
-            author: req.body.author,
-            title: req.body.title,
-            content: req.body.content
-  })
-    .then(entry => {
-      res.status(201).json(entry);
-    })
-    .catch(err => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-});
-
-app.put('/item/:id', (req, res) => {
-  const requiredFields = ['author', 'title', 'content'];
-
-  for(let i = 0; i < requiredFields.length; i++) {
-    const require = requiredFields[i];
-    if(!(require in req.body)) {
-      res.status(400).send(`Missing ${require} field.`);
-    }
-  }
-
-  AdviceEntry
-  .findByIdAndUpdate(req.params.id, {
-    $set: {
-      title: req.body.title,
-      content: req.body.content,
-      author: req.body.author
-    },
-    new: true
-  })
-    .exec()
-    .then(updated => {
-      console.log(updated);
-      res.status(200).json(updated);
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500);
-    });
-});
-
-app.delete('/item/:id', (req, res) => {
-  AdviceEntry
-    .findByIdAndRemove(req.params.id)
-    .exec()
-    .then(results => {res.status(204).end();
-    });
-});
-    // .catch(err => {
-    //   console.error(err);
-    //   res.status(500);
-    // });
-
+//Server functions
 let server;
-
 function runServer(databaseUrl, port) {
   return new Promise((resolve, reject) => {
     mongoose.createConnection(databaseUrl, err => {

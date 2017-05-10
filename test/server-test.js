@@ -2,12 +2,10 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const logger = require('morgan');
-
 mongoose.Promise = global.Promise;
 
 chai.should();
-
+app.use(bodyParser.json());
 //REQUIRE model schema called {BlogPost} from models.js
 // const { BlogPost } = require('../models');
 const { app, runServer, closeServer } = require('../server');
@@ -31,7 +29,7 @@ describe('AdviceEntry API resource', function() {
   });
 
   beforeEach(function() {
-    // return seedBlogPostData();
+    //return seedBlogPostData();
   });
 
   afterEach(function() {
@@ -73,7 +71,13 @@ describe('AdviceEntry API resource', function() {
 
           res.body.forEach(function(result) {
             result.should.be.a('object');
-            result.should.have.any.keys('_id', '__v','author', 'content', 'title');
+            result.should.have.any.keys(
+              '_id',
+              '__v',
+              'author',
+              'content',
+              'title'
+            );
           });
           return AdviceEntry.count();
         })
@@ -92,46 +96,49 @@ describe('AdviceEntry API resource', function() {
         content: 'Test Content Test Content Test Content Test Content'
       };
 
-      return chai.request(app)
-      .post('/item')
-      .send(newEntry)
-      .then(function(res) {
-        res.should.have.status(201);
-        res.should.be.json;
-        res.body.should.be.a('object');
-        res.body.should.include.keys('_id', '__v', 'author', 'content', 'title');
-        res.body._id.should.not.be.null;
-        res.body.author.should.equal(newEntry.author);
-        res.body.title.should.equal(newEntry.title);
-        res.body.content.should.equal(newEntry.content);
+      return chai
+        .request(app)
+        .post('/item')
+        .send(newEntry)
+        .then(function(res) {
+          res.should.have.status(201);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.include.keys(
+            '_id',
+            '__v',
+            'author',
+            'content',
+            'title'
+          );
+          res.body._id.should.not.be.null;
+          res.body.author.should.equal(newEntry.author);
+          res.body.title.should.equal(newEntry.title);
+          res.body.content.should.equal(newEntry.content);
 
-        return AdviceEntry.findById(res.body._id).exec();
-      })
-      .then(function(entry) {
-        entry.author.should.equal(newEntry.author);
-        entry.title.should.equal(newEntry.title);
-        entry.content.should.equal(newEntry.content);
-      });
+          return AdviceEntry.findById(res.body._id).exec();
+        })
+        .then(function(entry) {
+          entry.author.should.equal(newEntry.author);
+          entry.title.should.equal(newEntry.title);
+          entry.content.should.equal(newEntry.content);
+        });
     });
   });
 
-  describe.only('PUT endpoint', function(){
-    it('should update an entry by id', function(){
-
+  describe.only('PUT endpoint', function() {
+    it('should update an entry by id', function() {
       const updateEntry = {
-        'author': 'Updated Author',
-        'title': 'Updated Title',
-        'content': 'Updated Content Updated Content Updated Content Updated Content'
+        author: 'Updated Author',
+        title: 'Updated Title',
+        content: 'Updated Content Updated Content Updated Content Updated Content'
       };
-      return AdviceEntry
-        .findByIdAndUpdate()
+      return AdviceEntry.findByIdAndUpdate()
         .exec()
         .then(entry => {
           updateEntry._id = entry._id;
 
-          return chai.request(app)
-            .put(`/item/${entry._id}`)
-            .send(updateEntry);
+          return chai.request(app).put(`/item/${entry._id}`).send(updateEntry);
         })
         .then(res => {
           res.should.have.status(200);
@@ -148,25 +155,19 @@ describe('AdviceEntry API resource', function() {
           entry.title.should.equal(updateEntry.title);
           entry.content.should.equal(updateEntry.content);
         });
-
     });
   });
 
-
-
-
   describe('DELETE endpoint', function() {
-    it('should delete an entry by id', function(){
+    it('should delete an entry by id', function() {
       let entry;
 
-      return AdviceEntry
-        .findOne()
+      return AdviceEntry.findOne()
         .exec()
         .then(_entry => {
           entry = _entry;
           console.log(entry._id);
-          return chai.request(app)
-            .delete(`/item/${entry._id}`);
+          return chai.request(app).delete(`/item/${entry._id}`);
         })
         .then(res => {
           res.should.have.status(204);
@@ -176,9 +177,6 @@ describe('AdviceEntry API resource', function() {
           should.not.exist(entry);
           done();
         });
-
     });
-
   });
-
 });
