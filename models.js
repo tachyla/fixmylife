@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const adviceEntrySchema = mongoose.Schema({
-  author: String,
+  author: {type: String, unique: true},
   title: String,
   content: String
 });

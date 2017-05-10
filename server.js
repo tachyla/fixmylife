@@ -35,11 +35,14 @@ fetch('https://reddit.com/r/relationships.json?limit=10')
         const question = json.data.children[i].data.selftext;
         const author = json.data.children[i].data.author;
         const title = json.data.children[i].data.title;
+        
         AdviceEntry
           .create({
             author: author,
             title: title,
             content: question
+          }).catch(err =>{
+            console.error(err);
           });
       }
     });

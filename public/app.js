@@ -1,3 +1,13 @@
+const appState = {
+    
+    //will contain questions
+    //will contain comments
+    //will contain title
+    //will contain comments
+
+    
+};
+
 // function getQuestions() {
 //   $.getJSON('https://reddit.com/r/relationships.json?limit=10', function(results) {
   
