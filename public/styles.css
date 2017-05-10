@@ -1,0 +1,11 @@
+.container {
+  background-color: gray;
+}
+
+.jumbotron {
+  margin-top: 25px;
+}
+
+p {
+  font-size: 50px;
+}

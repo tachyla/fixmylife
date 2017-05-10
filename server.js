@@ -8,11 +8,11 @@ const app = express();
 app.use(bodyParser.json());
 mongoose.connect(DATABASE_URL);
 app.use(logger('combined'));
-app.use(express.static(__dirname + 'public'));
+app.use(express.static('public'));
 
 //route endpoints
 const router = require('./routes/routes');
-app.use('/', router);
+app.use(router);
 
 //Server functions
 let server;
