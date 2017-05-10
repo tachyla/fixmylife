@@ -8,7 +8,7 @@ const should = chai.should();
 //REQUIRE model schema called {BlogPost} from models.js
 // const { BlogPost } = require('../models');
 const { app, runServer, closeServer } = require('../server');
-const { DATABASE_URL, PORT } = require('../config');
+const { TEST_DATABASE_URL, PORT } = require('../config');
 const { AdviceEntry } = require('../models');
 app.use(jsonParser);
 //initialize Chai
@@ -36,7 +36,7 @@ function generateAdviceEntryData() {
 //PARENT DESCRIBE Function
 describe('AdviceEntry API resource unit tests', function() {
   before(function() {
-    return runServer(DATABASE_URL, PORT);
+    return runServer(TEST_DATABASE_URL, PORT);
   });
 
   beforeEach(function() {

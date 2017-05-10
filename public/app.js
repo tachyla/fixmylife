@@ -1,6 +1,8 @@
-console.log('hello');
 
-const data = AdviceEntry.find();
+
+$.getJSON('https://reddit.com/r/relationships.json', function(req, res) {
+  res.json();
+});
 
 function getItems() {
   $('.container').append(data);
