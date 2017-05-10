@@ -1,8 +1,14 @@
 
 
 $.getJSON('https://reddit.com/r/relationships.json?limit=10', function(results) {
-  const children = results.data.children;
-  children.forEach(question => { console.log(question.data.selftext); });
+  const questions = results.data.children[0].data.selftext;
+  // const template = '<li>';
+  // const html = questions.forEach(question => { template + question.data.selftext + '</li>'; });
+  // console.log(html);
+  //$('.questions').append(html);
+  const htmlString = `<li>${questions}</li>`;
+  //console.log(htmlString);
+  $('.questions').append(htmlString);
   //console.log(results.data.children[0].data.selftext);
 });
 
