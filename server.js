@@ -3,13 +3,18 @@ const express = require('express');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const { DATABASE_URL, PORT } = require('./config');
-
 const app = express();
+
 app.use(bodyParser.json());
 mongoose.connect(DATABASE_URL);
 app.use(logger('combined'));
-
 app.use(express.static('public'));
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'www.reddit.com');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 //route endpoints
 const login = require('./routes/login');
