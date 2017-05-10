@@ -3,7 +3,7 @@ const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 const jsonParser = require('body-parser').json();
 mongoose.Promise = global.Promise;
-chai.should();
+const should = chai.should();
 //REQUIRE model schema called {BlogPost} from models.js
 // const { BlogPost } = require('../models');
 const { app, runServer, closeServer } = require('../server');
@@ -91,7 +91,7 @@ describe('AdviceEntry API resource unit tests', function() {
       const newEntry = {
         author: 'Test Author',
         title: 'Test Title',
-        content: 'Test Content Test Content Test Content Test Content'
+        content: 'Test Content Test Content Test Content Test Content',
       };
 
       return chai
@@ -124,51 +124,54 @@ describe('AdviceEntry API resource unit tests', function() {
     });
   });
 
-  describe.('PUT endpoint test', function() {
+  describe('PUT endpoint test', function() {
     it('should update an entry by id', function() {
       const updateEntry = {
         author: 'Bobo',
         title: 'Updated Title',
-        content: 'Updated Content Updated Content Updated Content Updated Content'
+        content: 'Updated Content Updated Content Updated Content Updated Content',
       };
-      return AdviceEntry
-        .findOne()
-        .exec()
-        .then(entry => {
-          console.log('this is what it is finding:', entry);//it only gets the _id: and __v: entry is from database
-          updateEntry._id = entry._id;
-          entry.author = updateEntry.author;
-          entry.title = updateEntry.title;
-          entry.content = updateEntry.content;
-          //console.log('This is the original entry in database:', original);
-          return chai.request(app)
-          .put(`/item/${entry._id}`)
-          .send(updateEntry);
-        })
-        .then(res => {
-          //res is item from database
-          //console.log(res.body);//this is updateEntry with an _id:
-          res.should.have.status(201);
-          res.should.be.json;
-          res.should.be.a('object');
-          // console.log('What what', res.body.author);
-          res.body.author.should.equal(updateEntry.author);
-          res.body.title.should.equal(updateEntry.title);
-          res.body.content.should.equal(updateEntry.content);
-          //this is the updateEntry object
-          return AdviceEntry.findById(res.body._id).exec();
-        })
-        //entry is updateEntry object
-        .then(entry => {
-          //checks if original id matches updated id
-          //console.log(typeof entry._id);
-          //console.log(typeof updateEntry._id);
-          JSON.stringify(entry._id).should.equal(JSON.stringify(updateEntry._id));
-          //check if database item is updateEntry object
-          entry.author.should.equal(updateEntry.author);
-          entry.title.should.equal(updateEntry.title);
-          entry.content.should.equal(updateEntry.content);
-        });
+      return (
+        AdviceEntry.findOne()
+          .exec()
+          .then(entry => {
+            //console.log('this is what it is finding:', entry);//it only gets the _id: and __v: entry is from database
+            updateEntry._id = entry._id;
+            entry.author = updateEntry.author;
+            entry.title = updateEntry.title;
+            entry.content = updateEntry.content;
+            //console.log('This is the original entry in database:', original);
+            return chai
+              .request(app)
+              .put(`/item/${entry._id}`)
+              .send(updateEntry);
+          })
+          .then(res => {
+            //res is item from database
+            //console.log(res.body);//this is updateEntry with an _id:
+            res.should.have.status(201);
+            res.should.be.json;
+            res.should.be.a('object');
+            // console.log('What what', res.body.author);
+            res.body.author.should.equal(updateEntry.author);
+            res.body.title.should.equal(updateEntry.title);
+            res.body.content.should.equal(updateEntry.content);
+            //this is the updateEntry object
+            return AdviceEntry.findById(res.body._id).exec();
+          })
+          //entry is updateEntry object
+          .then(entry => {
+            //checks if original id matches updated id
+            //console.log(typeof entry._id);
+            //console.log(typeof updateEntry._id);
+            //JSON.stringify(entry._id).should.equal(JSON.stringify(updateEntry._id));
+            //check if database item is updateEntry object
+            entry._id.should.deep.equal(updateEntry._id);
+            entry.author.should.equal(updateEntry.author);
+            entry.title.should.equal(updateEntry.title);
+            entry.content.should.equal(updateEntry.content);
+          })
+      );
     });
   });
   describe('DELETE endpoint', function() {
@@ -187,7 +190,6 @@ describe('AdviceEntry API resource unit tests', function() {
         })
         .then(entry => {
           should.not.exist(entry);
-          done();
         });
     });
   });
