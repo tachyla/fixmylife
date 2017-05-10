@@ -30,7 +30,7 @@ function seedAdviceEntryData() {
   return AdviceEntry.insertMany(seedData);
 }
 function generateAdviceEntryData() {
-  return { author: faker.name(), title: faker.lorem.sentence(), content: faker.lorem.sentence() };
+  return { author: faker.name.firstName(), title: faker.lorem.sentence(), content: faker.lorem.sentence() };
 }
 
 //PARENT DESCRIBE Function
