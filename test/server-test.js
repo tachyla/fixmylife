@@ -84,16 +84,32 @@ describe('AdviceEntry API resource', function() {
   });
 
   describe('POST endpoint', function() {
-    it('testing for adding entry', function() {
-      let resPost;
-      res = resPost;
+    it('should add a new entry', function() {
+      //QUESTION MAYBE WE SHOULD USE FAKER??
+      const newEntry = {
+        author: 'Test Author',
+        title: 'Test Title',
+        content: 'Test Content Test Content Test Content Test Content'
+      };
+
       return chai.request(app)
       .post('/item')
-      .then( (result)  => {
-        res = result;
+      .send(newEntry)
+      .then(function(res) {
         res.should.have.status(201);
         res.should.be.json;
-        res.should.have.any.keys('_id', '__v', 'author', 'content', 'title');
+        res.body.should.be.a('object');
+        res.body.should.include.keys('_id', '__v', 'author', 'content', 'title');
+        res.body._id.should.not.be.null;
+        res.body.author.should.equal(newEntry.author);
+        res.body.title.should.equal(newEntry.title);
+        res.body.content.should.equal(newEntry.content);
+        return AdviceEntry.findById(res.body._id).exec();
+      })
+      .then(function(entry) {
+        entry.author.should.equal(newEntry.author);
+        entry.title.should.equal(newEntry.title);
+        entry.content.should.equal(newEntry.content);
       });
     });
   });

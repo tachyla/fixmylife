@@ -43,8 +43,8 @@ app.post('/item', (req, res) => {
     const require = requiredFields[i];
     requiredFields.forEach(field => {
       if (!(field in req.body)) {
-      // res.status(400).json({error: `Missing "${field}" in request body`});
-        res.status(400).send(`Missing ${field} field in request body.`);
+        res.status(400).json({error: `Missing "${field}" in request body`});
+        // res.status(400).send(`Missing ${field} field in request body.`);
       }
     });
   }    
@@ -55,7 +55,7 @@ app.post('/item', (req, res) => {
             content: req.body.content
   })
     .then(entry => {
-      res.json(entry);
+      res.status(201).json(entry);
     })
     .catch(err => {
       console.error(err);
