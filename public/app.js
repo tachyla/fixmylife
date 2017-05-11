@@ -1,6 +1,4 @@
-
 $.getJSON('/items', function (results) {
-
   for (let i = 0; i < 10; i++) {
     const question = results[i].content;
     const topic_id = results[i]._id;
@@ -22,17 +20,11 @@ $('.submit-post').on('click', function() {
 
   //append comment to post
   $('.post-comments').append(`<li>${value}</li>`);
- $.ajax({
+
+  $.ajax({
     method: 'POST',
     dataType: 'json',
-    url: 'http://localhost:8080/items',
+    url: '/items',
     data: '{"content": value}'
   });
-
-
-    //AJAX request type
-    // $.ajax()
-    // Method: "POST"
-
-
-
+});

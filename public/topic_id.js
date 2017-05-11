@@ -8,11 +8,16 @@ $('.send').on('click', function() {
 
   //append comment to post
   //Needs to adjust schema
-  $('.post-comments').append(`<li>${value}</li>`);
-  $.ajax({
+
+  $.ajax(
     method: 'PUT',
-    dataType: 'json',
-    url: 'http://localhost:8080/items/:_id',
-    data: '{"comment": value}',
+    contentType: 'application/json',
+    url: 'api/items' + window.location.pathname,
+    data: JSON.stringify({ comment: value }),
+    success: function(response) {
+      console.log(response);
+      $('.put-comments').append(`<li>${value}</li>`);
+    }
   });
+
 });

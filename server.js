@@ -3,12 +3,13 @@ const express = require('express');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 var fetch = require('node-fetch');
+const cors = require('cors');
 
 const { DATABASE_URL, PORT } = require('./config');
 const { AdviceEntry } = require('./models');
 
 const app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
 mongoose.connect(DATABASE_URL);
 app.use(logger('combined'));
@@ -16,7 +17,10 @@ app.use(express.static('public'));
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', 'www.reddit.com');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
   next();
 });
 
@@ -31,28 +35,27 @@ app.use(login);
 app.use(topic);
 
 fetch('https://reddit.com/r/relationships.json?limit=10')
-    .then(function(res) {
-      return res.json();
-    })
-    .then(function(json) {
-      for(let i = 0; i < 10; i ++) {
-        const question = json.data.children[i].data.selftext;
-        const author = json.data.children[i].data.author;
-        const title = json.data.children[i].data.title;
-        
-        AdviceEntry
-          .create({
-            author: author,
-            title: title,
-            content: question
-          }).catch(err =>{
-            (err);
-          });
-      }
-    });
-      
-  
+  .then(function(res) {
+    return res.json();
+  })
+  .then(function(json) {
+    const topicsArray = [];
+    for (let i = 0; i < 10; i++) {
+      topicsArray.push({
+        question: json.data.children[i].data.selftext,
+        author: json.data.children[i].data.author,
+        title: json.data.children[i].data.title,
+      });
+    }
+    console.log(topicsArray);
+      //reduce amount of times call to db
+    AdviceEntry
+      .insertMany(topicsArray)
+      .catch(err => {
+        err;
+      });
 
+  });
 
 //Server functions
 let server;
