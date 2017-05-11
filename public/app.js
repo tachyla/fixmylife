@@ -1,8 +1,8 @@
 //document ready
-$(function() {
-  $.getJSON('/items', function (results) {
+$(document).ready(function() {
+  $.getJSON('/items', function(results) {
     //FIRST APPENDED topicHTML to the dom
-    $('.topicScreen').append(topicHTML );
+    $('.topicScreen').append(topicHTML);
     for (let i = 0; i < 10; i++) {
       const question = results[i].content;
       const topic_id = results[i]._id;
@@ -10,15 +10,44 @@ $(function() {
       //then append the questions to the question class
       $('.questions').append(questionHTML);
     }
+  });
+//http://localhost:8080/topics/59147ebfaea5b80bec56063d
+//http://localhost:8080/topics/59147ebfaea5b80bec56063d
+  $.getJSON('/api'+ window.location.pathname, function(results) {
+    $('.one-topic').append(topic_idHTML);
+    //results is the object
+    const content = results.content;
+    const comment = results.comment;
+    $('.container-left').append(content);
+  });
 
+  debugger;
+  //const userComment = window.location.pathname;
+  $('.send').on('click', function() {
+    //event.preventDefault();
+    debugger;
+    console.log('button was clicked');
+    const value = $('.user-comment').val();
+    //value is the user input
+    console.log(value);
+    //insert value to database
+
+    fetch('/topics' + userComment, {
+      method: 'PUT',
+      body: { comment: value },
+      success: 'Added comment to DB'
+    });
+
+    //This appends comments to the container-bottom
+    $('.container-bottom').append(value);
   });
 });
 
-  //on click of create button
-  //anchor tag links user to the post.html page
-  //target class on html page to append postHTML
+//on click of create button
+//anchor tag links user to the post.html page
+//target class on html page to append postHTML
 $('.create-btn').on('click', function() {
-  const postHTML =   `<input type="textarea" class="user-post-textarea">
+  const postHTML = `<input type="textarea" class="user-post-textarea">
                           <button name="submit-post">SUBMIT</button>`;
   $('.createScreen').append(postHTML);
 });
@@ -34,7 +63,7 @@ $('.submit-post').on('click', function() {
     method: 'POST',
     dataType: 'json',
     url: 'http://localhost:8080/topics',
-    data: '{"content": value}'
+    data: '{"content": value}',
   });
 });
 
@@ -67,7 +96,7 @@ const topic_idHTML = `<div class="row">
                         <section class="comments-section">
                           <h1>Comments</h1>
                           <input type="textarea" class="user-comment">
-                          <button type="submit" class="send">Submit</button>
+                          <input type="submit" value="submit" class="send"></input>
                         </section>
                       </div>
                     </div>
