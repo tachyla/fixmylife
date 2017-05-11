@@ -22,7 +22,12 @@ $('.submit-post').on('click', function() {
 
   //append comment to post
   $('.post-comments').append(`<li>${value}</li>`);
-
+ $.ajax({
+    method: 'POST',
+    dataType: 'json',
+    url: 'http://localhost:8080/items',
+    data: '{"content": value}'
+  });
 
 
     //AJAX request type

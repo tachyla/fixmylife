@@ -7,13 +7,12 @@ $('.send').on('click', function() {
   //insert value to database
 
   //append comment to post
+  //Needs to adjust schema
   $('.post-comments').append(`<li>${value}</li>`);
-
   $.ajax({
-    type: 'PUT',
+    method: 'PUT',
     dataType: 'json',
     url: 'http://localhost:8080/items/:_id',
     data: '{"comment": value}',
   });
-
 });
