@@ -16,7 +16,12 @@ $.getJSON('/items', function (results) {
     //1-nedd to get the topic
     //2- render topic to appropriate container
 
+$('.submit-post').on('click', function() {
+  const value = $('.user-post-textarea').val();
+  //insert value to database
 
+  //append comment to post
+  $('.post-comments').append(`<li>${value}</li>`);
 
 
 

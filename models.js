@@ -4,6 +4,7 @@ const adviceEntrySchema = mongoose.Schema({
   author: {type: String, unique: true},
   title: String,
   content: String
+  //comments: [String]
 });
 
 

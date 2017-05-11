@@ -75,6 +75,12 @@ router.post('/items', (req, res) => {
       res.sendStatus(500);
     });
 });
+//put request for adding comments to topics
+router.put('/api/items/:id', function(res, req) {
+
+});
+
+
 
 router.put('/items/:id', (req, res) => {
   const requiredFields = ['author', 'title', 'content'];
