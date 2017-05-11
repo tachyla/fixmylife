@@ -21,10 +21,10 @@ $('.submit-post').on('click', function() {
   //append comment to post
   $('.post-comments').append(`<li>${value}</li>`);
 
-  $.ajax({
+  fetch({
     method: 'POST',
     dataType: 'json',
-    url: '/items',
+    url: 'http://localhost:8080/topics',
     data: '{"content": value}'
   });
 });

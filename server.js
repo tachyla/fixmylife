@@ -16,7 +16,7 @@ app.use(logger('combined'));
 app.use(express.static('public'));
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'www.reddit.com');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
@@ -47,7 +47,6 @@ fetch('https://reddit.com/r/relationships.json?limit=10')
         title: json.data.children[i].data.title,
       });
     }
-    console.log(topicsArray);
       //reduce amount of times call to db
     AdviceEntry
       .insertMany(topicsArray)

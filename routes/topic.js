@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { AdviceEntry } = require('../models');
+const { AdviceEntry, Comment } = require('../models');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const path = require('path');
@@ -20,9 +20,9 @@ router.get('/api/topics/:topic_id', (req, res) => {
   AdviceEntry
     .findOne({_id: req.params.topic_id })
     .then(results => {
-      res.json(results.content);
+      //sends the current topic object
+      res.json(results);
     });
-
   // res.json({message: req.params.topic_id});
 });
 
@@ -65,7 +65,8 @@ router.post('/items', (req, res) => {
   AdviceEntry.create({
     author: req.body.author,
     title: req.body.title,
-    content: req.body.content
+    content: req.body.content,
+    comment: req.body.comment
   })
     .then(entry => {
       res.status(201).json(entry);
@@ -75,6 +76,12 @@ router.post('/items', (req, res) => {
       res.sendStatus(500);
     });
 });
+
+router.post('/comments', (req, res) => {
+  Comment.create({comment: req.body.comment}).then(comment => res.json(comment));
+});
+
+
 //put request for adding comments to topics
 
 router.put('/items/:id', (req, res) => {
