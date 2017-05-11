@@ -12,10 +12,7 @@ $.getJSON('/items', function (results) {
 // $.getJSON('/api/topics/', function (results) {
 //   console.log(results.content);
 //   $('.container-left').append(results);
-//   // res.json(results.content);
-//   // const clickedTopic = results.content;
-//   // console.log(clickedTopic);
-// });
+//  });
     //1-nedd to get the topic
     //2- render topic to appropriate container
 
