@@ -2,7 +2,7 @@
 $(function() {
   $.getJSON('/items', function (results) {
     //FIRST APPENDED topicHTML to the dom
-      $('.topicScreen').append(topicHTML );
+    $('.topicScreen').append(topicHTML );
     for (let i = 0; i < 10; i++) {
       const question = results[i].content;
       const topic_id = results[i]._id;
@@ -17,11 +17,11 @@ $(function() {
   //on click of create button
   //anchor tag links user to the post.html page
   //target class on html page to append postHTML
-    $('.create-btn').on('click', function() {
-      const postHTML =   `<input type="textarea" class="user-post-textarea">
+$('.create-btn').on('click', function() {
+  const postHTML =   `<input type="textarea" class="user-post-textarea">
                           <button name="submit-post">SUBMIT</button>`;
-      $('.createScreen').append(postHTML);
-    });
+  $('.createScreen').append(postHTML);
+});
 
 $('.submit-post').on('click', function() {
   const value = $('.user-post-textarea').val();
@@ -36,7 +36,6 @@ $('.submit-post').on('click', function() {
     url: 'http://localhost:8080/topics',
     data: '{"content": value}'
   });
-});
 });
 
 const loginHTML = `<div class="login-container">
