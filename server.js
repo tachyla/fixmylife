@@ -22,9 +22,10 @@ app.use(function(req, res, next) {
 
 //route endpoints
 const login = require('./routes/login');
-//HERE
+//ROUTE RENAMED HERE
 const topic = require('./routes/topic');
 // const user = require('./routes/user');
+
 app.use(login);
 // app.use(user);
 app.use(topic);
@@ -45,7 +46,7 @@ fetch('https://reddit.com/r/relationships.json?limit=10')
             title: title,
             content: question
           }).catch(err =>{
-            console.error(err);
+            (err);
           });
       }
     });

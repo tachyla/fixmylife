@@ -11,6 +11,23 @@ router.get('/topics', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/topic.html'));
 });
 
+router.get('/topics/:topic_id', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/topic_id.html'));
+});
+
+//to identify that its meant for BE; just to display data
+router.get('/api/topics/:topic_id', (req, res) => {
+  AdviceEntry
+    .findOne({_id: req.params.topic_id })
+    .then(results => {
+      res.json(results.content);
+    });
+
+  // res.json({message: req.params.topic_id});
+});
+
+
+
 router.get('/items', (req, res) => {
   AdviceEntry.find()
     .then(entry => {
