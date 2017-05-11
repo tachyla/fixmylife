@@ -6,15 +6,12 @@
         console.log(question);
 
         const htmlString = `<a href="#"><li>${question}</li><a/><br>`;      
-        $('.question').append(htmlString);
+        $('.questions').append(htmlString);
       }
     });
-    //will contain questions
-    //will contain author
-    //will contain title
-    //will contain comments
-
-    
+    //AJAX request type
+    // $.ajax()
+    // Method: "POST"
 
 
 //function getData(question) {
