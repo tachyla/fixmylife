@@ -10,13 +10,13 @@ $(function() {
       //then append the questions to the question class
       $('.questions').append(questionHTML);
     }
-    
+
   });
 });
 
   //on click of create button
   //anchor tag links user to the post.html page
-  //target class on html page to append postHTML 
+  //target class on html page to append postHTML
     $('.create-btn').on('click', function() {
       const postHTML =   `<input type="textarea" class="user-post-textarea">
                           <button name="submit-post">SUBMIT</button>`;
@@ -30,7 +30,6 @@ $('.submit-post').on('click', function() {
   //append comment to post
   $('.post-comments').append(`<li>${value}</li>`);
 
-<<<<<<< HEAD
   fetch({
     method: 'POST',
     dataType: 'json',
@@ -38,7 +37,6 @@ $('.submit-post').on('click', function() {
     data: '{"content": value}'
   });
 });
-=======
 });
 
 const loginHTML = `<div class="login-container">
@@ -62,7 +60,7 @@ const topicHTML = `  <div class="container">
                           <h1>Fix My Life</h1>
                         <ul class="questions"></ul>
                         <a href="../post.html"><button class="create-btn">CREATE</button></a>
-                      </div>`; 
+                      </div>`;
 
 const topic_idHTML = `<div class="row">
                       <div class="container-left col-md-8"></div>
@@ -78,4 +76,3 @@ const topic_idHTML = `<div class="row">
                       <ul class="post-comments">
                       </ul>
                     </div>`;
->>>>>>> 1d7b2119db9667d9bac8cbdfec788d915f01d71a
