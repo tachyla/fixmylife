@@ -52,12 +52,12 @@ describe('AdviceEntry API resource unit tests', function() {
   });
 
   describe('GET endpoint', function() {
-    it('should display all existing items', function() {
+    it('should display all existing topics', function() {
       let res;
 
       return chai
         .request(app)
-        .get('/items')
+        .get('/api/topics')
         .then(results => {
           res = results;
           res.should.have.status(200);
@@ -74,7 +74,7 @@ describe('AdviceEntry API resource unit tests', function() {
       let res;
       return chai
         .request(app)
-        .get('/items')
+        .get('/topics')
         .then(results => {
           res = results;
           res.should.have.status(200);
@@ -109,7 +109,7 @@ describe('AdviceEntry API resource unit tests', function() {
 
       return chai
         .request(app)
-        .post('/items')
+        .post('/topics')
         .send(newEntry)
         .then(function(res) {
           res.should.have.status(201);
@@ -156,7 +156,7 @@ describe('AdviceEntry API resource unit tests', function() {
             //console.log('This is the original entry in database:', original);
             return chai
               .request(app)
-              .put(`/items/${entry._id}`)
+              .put(`/topics/${entry._id}`)
               .send(updateEntry);
           })
           .then(res => {
@@ -195,7 +195,7 @@ describe('AdviceEntry API resource unit tests', function() {
         .exec()
         .then(_entry => {
           entry = _entry;
-          return chai.request(app).delete(`/items/${entry._id}`);
+          return chai.request(app).delete(`/topics/${entry._id}`);
         })
         .then(res => {
           res.should.have.status(204);

@@ -19,4 +19,4 @@ const adviceEntrySchema = mongoose.Schema({
 
 const AdviceEntry = mongoose.model('AdviceEntry', adviceEntrySchema);
 //const Comment= mongoose.model('Comment', commentSchema);
-module.exports = { AdviceEntry, /*Comment*/ };
+module.exports = { AdviceEntry /*Comment*/ };

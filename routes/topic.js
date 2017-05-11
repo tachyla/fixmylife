@@ -5,9 +5,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const path = require('path');
 
-// router.get('/users', (req, res) => {
 router.get('/topics', (req, res) => {
-  // res.sendFile(path.join(__dirname, '../public/user.html'));
   res.sendFile(path.join(__dirname, '../public/topic.html'));
 });
 
@@ -16,19 +14,18 @@ router.get('/topics/:topic_id', (req, res) => {
 });
 
 //to identify that its meant for BE; just to display data
-router.get('/api/topics/:topic_id', (req, res) => {
+router.get('/topics/:topic_id', (req, res) => {
   AdviceEntry
     .findOne({_id: req.params.topic_id })
     .then(results => {
       //sends the current topic object
       res.json(results);
     });
-  // res.json({message: req.params.topic_id});
 });
 
 
 
-router.get('/items', (req, res) => {
+router.get('/api/topics', (req, res) => {
   AdviceEntry.find()
     .then(entry => {
       res.json(entry);
@@ -39,7 +36,7 @@ router.get('/items', (req, res) => {
     });
 });
 
-router.get('/items/:id', (req, res) => {
+router.get('/topics/:id', (req, res) => {
   AdviceEntry.findById(req.params.id)
     .exec()
     .then(result => {
@@ -51,14 +48,13 @@ router.get('/items/:id', (req, res) => {
     });
 });
 
-router.post('/items', (req, res) => {
+router.post('/topics', (req, res) => {
   const requiredFields = ['author', 'title', 'content'];
 
   for (let i = 0; i < requiredFields.length; i++) {
     requiredFields.forEach(field => {
       if (!(field in req.body)) {
         res.status(400).json({ error: `Missing "${field}" in request body` });
-        // res.status(400).send(`Missing ${field} field in request body.`);
       }
     });
   }
@@ -84,7 +80,7 @@ router.post('/comments', (req, res) => {
 
 //put request for adding comments to topics
 
-router.put('/items/:id', (req, res) => {
+router.put('/topics/:id', (req, res) => {
   const requiredFields = ['author', 'title', 'content'];
 
   for (let i = 0; i < requiredFields.length; i++) {
@@ -104,7 +100,6 @@ router.put('/items/:id', (req, res) => {
   )
   .exec()
   .then(updated => {
-      // console.log(updated);
     res.status(201).json(updated);
   })
     .catch(err => {
@@ -113,14 +108,10 @@ router.put('/items/:id', (req, res) => {
     });
 });
 
-router.delete('/items/:id', (req, res) => {
+router.delete('/topics/:id', (req, res) => {
   AdviceEntry.findByIdAndRemove(req.params.id).exec().then( () => {
     res.status(204).end();
   });
 });
-// .catch(err => {
-//   console.error(err);
-//   res.status(500);
-// });
 
 module.exports = router;

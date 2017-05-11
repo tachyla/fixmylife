@@ -42,7 +42,7 @@ fetch('https://reddit.com/r/relationships.json?limit=10')
     const topicsArray = [];
     for (let i = 0; i < 10; i++) {
       topicsArray.push({
-        question: json.data.children[i].data.selftext,
+        content: json.data.children[i].data.selftext,
         author: json.data.children[i].data.author,
         title: json.data.children[i].data.title,
       });

@@ -1,6 +1,7 @@
 //document ready
 $(document).ready(function() {
-  $.getJSON('/items', function(results) {
+
+  $.getJSON('/topics', (results) {
     //FIRST APPENDED topicHTML to the dom
     $('.topicScreen').append(topicHTML);
     for (let i = 0; i < 10; i++) {
@@ -21,11 +22,9 @@ $(document).ready(function() {
     $('.container-left').append(content);
   });
 
-  debugger;
   //const userComment = window.location.pathname;
   $('.send').on('click', function() {
     //event.preventDefault();
-    debugger;
     console.log('button was clicked');
     const value = $('.user-comment').val();
     //value is the user input
