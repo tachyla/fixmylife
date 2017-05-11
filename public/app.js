@@ -1,7 +1,6 @@
 //document ready
 $(document).ready(function() {
-
-  $.getJSON('/topics', (results) {
+  $.getJSON('/api/topics', function(results) {
     //FIRST APPENDED topicHTML to the dom
     $('.topicScreen').append(topicHTML);
     for (let i = 0; i < 10; i++) {
@@ -12,9 +11,9 @@ $(document).ready(function() {
       $('.questions').append(questionHTML);
     }
   });
-//http://localhost:8080/topics/59147ebfaea5b80bec56063d
-//http://localhost:8080/topics/59147ebfaea5b80bec56063d
-  $.getJSON('/api'+ window.location.pathname, function(results) {
+  //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
+  //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
+  $.getJSON('/api' + window.location.pathname, function(results) {
     $('.one-topic').append(topic_idHTML);
     //results is the object
     const content = results.content;
@@ -22,21 +21,22 @@ $(document).ready(function() {
     $('.container-left').append(content);
   });
 
-  //const userComment = window.location.pathname;
+  const commentID = window.location.pathname;
   $('.send').on('click', function() {
     //event.preventDefault();
-    console.log('button was clicked');
     const value = $('.user-comment').val();
     //value is the user input
-    console.log(value);
     //insert value to database
 
-    fetch('/topics' + userComment, {
+/*    fetch(`/api${commentID}`, {
       method: 'PUT',
-      body: { comment: value },
-      success: 'Added comment to DB'
+    }).then(res => {
+      const waka = $('.user-comment').val();
+      console.log('This is value:', value);
+      console.log('This is waka:', waka);
+      AdviceEntry.update({ comment: value });
     });
-
+*/
     //This appends comments to the container-bottom
     $('.container-bottom').append(value);
   });

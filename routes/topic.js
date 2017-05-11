@@ -14,7 +14,7 @@ router.get('/topics/:topic_id', (req, res) => {
 });
 
 //to identify that its meant for BE; just to display data
-router.get('/topics/:topic_id', (req, res) => {
+router.get('/api/topics/:topic_id', (req, res) => {
   AdviceEntry
     .findOne({_id: req.params.topic_id })
     .then(results => {
