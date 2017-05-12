@@ -116,7 +116,6 @@ $(document).on('click', '.send', function(data) {
     }).catch(err => console.error(err));
 });
 const num = Math.floor(Math.random() * 20);
-console.log(num);
 const topicHTML = `<div class="container1">
                         <div class="jumbotron">
                           <h1>Trending Topics</h1>
