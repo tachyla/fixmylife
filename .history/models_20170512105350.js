@@ -15,6 +15,7 @@ const commentSchema = mongoose.Schema({
   comment: String
 });
 
+
 const AdviceEntry = mongoose.model('AdviceEntry', adviceEntrySchema);
 const Comment= mongoose.model('Comment', commentSchema);
 module.exports = { AdviceEntry, Comment };

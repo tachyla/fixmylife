@@ -6,7 +6,7 @@ var fetch = require('node-fetch');
 const cors = require('cors');
 
 const { DATABASE_URL, PORT } = require('./config');
-const { AdviceEntry, Comment } = require('./models');
+const { AdviceEntry, Comments } = require('./models');
 
 const app = express();
 app.use(cors());

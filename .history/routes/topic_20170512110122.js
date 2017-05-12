@@ -15,21 +15,15 @@ router.get(`/topics/:topic_id`, (req, res) => {
 
 //to identify that its meant for BE; just to display data
 router.get(`/api/topics/:topic_id`, (req, res) => {
-  AdviceEntry.findOne({ _id: req.params.topic_id }).then(results => {
-    //sends the current topic object
-    res.json(results);
-  });
-});
-
-router.get('/api/comments', (req, res) => {
-  Comment.find()
-    .then(entry => {
-      res.json(entry);
-    })
-    .catch(err => {
-      console.error(err);
+  AdviceEntry
+    .findOne({_id: req.params.topic_id })
+    .then(results => {
+      //sends the current topic object
+      res.json(results);
     });
 });
+
+
 
 router.get(`/api/topics`, (req, res) => {
   AdviceEntry.find()
@@ -67,7 +61,7 @@ router.post(`/topics`, (req, res) => {
   AdviceEntry.create({
     author: req.body.author,
     title: req.body.title,
-    content: req.body.content,
+    content: req.body.content
   })
     .then(entry => {
       res.status(201).json(entry);
@@ -79,10 +73,9 @@ router.post(`/topics`, (req, res) => {
 });
 
 router.post(`/comments`, (req, res) => {
-  Comment.create({ comment: req.body.comment })
-    .then(comment => res.json(comment))
-    .catch(err => console.error(err));
+  Comment.create({comment: req.body.comment}).then(comment => res.json(comment)).catch(err => console.error(err));
 });
+
 
 //put request for adding comments to topics****************************************
 
@@ -96,20 +89,18 @@ router.put(`/topics/:id`, (req, res) => {
     }
   }
 
-  AdviceEntry.findByIdAndUpdate(
-    req.params.id,
-    {      $set: {
-        title: req.body.title,
-        content: req.body.content,
-        author: req.body.author
-      }
-    },
+  AdviceEntry.findByIdAndUpdate(req.params.id,
+    { $set: {
+      title: req.body.title,
+      content: req.body.content,
+      author: req.body.author
+    }},
     { new: true }
   )
-    .exec()
-    .then(updated => {
-      res.status(201).json(updated);
-    })
+  .exec()
+  .then(updated => {
+    res.status(201).json(updated);
+  })
     .catch(err => {
       console.error(err);
       res.status(500);
@@ -117,7 +108,7 @@ router.put(`/topics/:id`, (req, res) => {
 });
 ////////////*************DELETE */
 router.delete(`/topics/:id`, (req, res) => {
-  AdviceEntry.findByIdAndRemove(req.params.id).exec().then(() => {
+  AdviceEntry.findByIdAndRemove(req.params.id).exec().then( () => {
     res.status(204).end();
   });
 });

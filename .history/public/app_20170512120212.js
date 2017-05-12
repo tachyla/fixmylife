@@ -23,7 +23,7 @@ $(document).ready(function() {
     }
   })
 
-    //$('.post-comments').prepend('This is where the comments go!');
+    $('.post-comments').append('This is where the comments go!');
     //one-topic is entire DOM
     $(`.one-topic`).append(topic_idHTML);
 
@@ -101,22 +101,6 @@ $(document).on('click', '.send', function(data) {
   comment = `<li class="advice">${advice}</li>`;
   $('.post-comments').append(comment);
 
-<<<<<<< HEAD
-//   fetch({
-//     method: 'POST',
-//     dataType: 'json',
-//     url: 'http://localhost:8080/topics',
-//     data: '{"content": value}',
-//   });
-// });
-const headerHTML = `<div class="container1">
-                      <img src="#" alt="">
-                        <div class="header">
-                          <h1>Fix My Life</h1>
-                      </div>`;
-
-const topicHTML = `  <div class="container1">
-=======
   //const commentURL = 'http://localhost:8080//comments'
   $.ajax({
       url: 'http://localhost:8080/comments',
@@ -131,10 +115,8 @@ const topicHTML = `  <div class="container1">
       type: 'POST'
     }).catch(err => console.error(err));
 });
-const num = Math.floor(Math.random() * 20);
-console.log(num);
+
 const topicHTML = `<div class="container1">
->>>>>>> refs/remotes/origin/master
                         <div class="jumbotron">
                           <h1>Trending Topics</h1>
                         <ul class="questions"></ul>
@@ -153,7 +135,7 @@ const postHTML = `<div class="container2">
                   </div>`;
 //FOCUS on a single topic**********************************************
 const topic_idHTML = `<div class="row">
-                      <div class="container-left col-md-8"></div><span class="badge">${num}</span>
+                      <div class="container-left col-md-8"></div>
                       <div class="container-right col-md-4">
                         <section class="comments-section">
                           <h1>Give Advice</h1>

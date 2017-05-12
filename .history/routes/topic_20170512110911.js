@@ -104,7 +104,7 @@ router.put(`/topics/:id`, (req, res) => {
         author: req.body.author
       }
     },
-    { new: true }
+    { new: true },
   )
     .exec()
     .then(updated => {

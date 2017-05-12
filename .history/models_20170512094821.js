@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const adviceEntrySchema = mongoose.Schema({
   author: String,
   title: String,
-  content: String
+  content: String,
   //This needs to be embedded data
   //store id of comment
   //fetch
@@ -15,6 +15,7 @@ const commentSchema = mongoose.Schema({
   comment: String
 });
 
+
 const AdviceEntry = mongoose.model('AdviceEntry', adviceEntrySchema);
-const Comment= mongoose.model('Comment', commentSchema);
-module.exports = { AdviceEntry, Comment };
+//const Comment= mongoose.model('Comment', commentSchema);
+module.exports = { AdviceEntry /*Comment*/ };

@@ -16,14 +16,7 @@ $(document).ready(function() {
   //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
   $.getJSON(`/api` + window.location.pathname, function(results) {
     //results is entire object
-  $.getJSON('/api/comments', function(advice) {
-    for(let i = 0; i < advice.length; i++) {
-      const comment = `<li>${advice[i].comment}</li>`;
-      $('.post-comments').append(comment);
-    }
-  })
 
-    //$('.post-comments').prepend('This is where the comments go!');
     //one-topic is entire DOM
     $(`.one-topic`).append(topic_idHTML);
 
@@ -63,13 +56,12 @@ $(document).ready(function() {
     });
 //(((((((((DELETE)))))))))
 
-  const commentID = window.location.pathname;
 
   });
 
   //CAPTURES USERS POST*******************************************************************************************************
+  const commentID = window.location.pathname;
   const URL = 'http://localhost:8080/topics';
-$.getJSON(`/api` + window.location.pathname, function(results) {
   $(document).on(`click`, `#create`, function(event) {
     event.preventDefault();
     const userPost = $(`.user-post-textarea`).val();
@@ -91,50 +83,15 @@ $.getJSON(`/api` + window.location.pathname, function(results) {
     });
   });
 });
-
-});//End of document ready>>>>>>>>>>>>>>>>
 ////////USER ADVICE//////////////******************************* */
-$(document).on('click', '.send', function(data) {
+$(document).on('click', '.send', function() {
   //console.log('This is giving advice.');
-  commentID = window.location.pathname;
-  let advice = $('.user-comment').val();
-  comment = `<li class="advice">${advice}</li>`;
+  let comment = $('.user-comment').val();
+  comment = `<li>${comment}</li>`;
   $('.post-comments').append(comment);
-
-<<<<<<< HEAD
-//   fetch({
-//     method: 'POST',
-//     dataType: 'json',
-//     url: 'http://localhost:8080/topics',
-//     data: '{"content": value}',
-//   });
-// });
-const headerHTML = `<div class="container1">
-                      <img src="#" alt="">
-                        <div class="header">
-                          <h1>Fix My Life</h1>
-                      </div>`;
+});
 
 const topicHTML = `  <div class="container1">
-=======
-  //const commentURL = 'http://localhost:8080//comments'
-  $.ajax({
-      url: 'http://localhost:8080/comments',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      data: JSON.stringify({
-        //Need to pass the required fields
-        comment: advice
-      }),
-      type: 'POST'
-    }).catch(err => console.error(err));
-});
-const num = Math.floor(Math.random() * 20);
-console.log(num);
-const topicHTML = `<div class="container1">
->>>>>>> refs/remotes/origin/master
                         <div class="jumbotron">
                           <h1>Trending Topics</h1>
                         <ul class="questions"></ul>
@@ -153,7 +110,7 @@ const postHTML = `<div class="container2">
                   </div>`;
 //FOCUS on a single topic**********************************************
 const topic_idHTML = `<div class="row">
-                      <div class="container-left col-md-8"></div><span class="badge">${num}</span>
+                      <div class="container-left col-md-8"></div>
                       <div class="container-right col-md-4">
                         <section class="comments-section">
                           <h1>Give Advice</h1>
