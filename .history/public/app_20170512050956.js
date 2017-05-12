@@ -48,7 +48,6 @@ $(document).ready(function() {
     });
 //((((((((DELETE))))))))
     $('.delete').on('click', function() {
-      alert('Are you sure you want to delete this post?');
       $.ajax({
         url: URL+'/'+topicID,
         type: 'DELETE'
