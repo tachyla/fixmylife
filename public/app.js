@@ -15,54 +15,68 @@ $(document).ready(function() {
     $('.one-topic').append(topic_idHTML);
     //results is the object
     const content = results.content;
-    const comment = results.comment;
+    //const comment = results.comment;
     $('.container-left').append(content);
   });
 
-  $('.posting').on('click', function() {
-    const myAuthor = $('.my-author').val();
-    const myTitle = $('.my-title').val();
-    const myContent = $('.my-content').val();
-    $.ajax({
-      url: '/topics',
-      data: JSON.stringify({
-        author: myAuthor,
-        title: myTitle,
-        content: myContent,
-      }),
-      type: 'POST',
-      contentType: 'application/json',
-    });
-  });
-
-  const commentID = window.location.pathname;
-
-  $(document).on('click', '.send', function() {
-    //event.preventDefault();
-    const value = $('.user-comment').val();
-    //console.log('this button is clicked');
-    //value is the user input
-    //insert value to database
-//http://localhost:8080/topics/5915000734418f3dc4398ee4
-//http://localhost:8080/topics/5915000734418f3dc4398ee4
-    fetch('http://localhost:8080/topics', {
-      method: 'POST',
+  $('.delete').on('click', function() {
+    fetch('http://localhost:8080/topics' + commentID, {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        author: 'Tee',
-        title: 'You can do it!',
-        content: value
-      }),
+      }
     }).then(res => {
       return res.json();
     });
-
-    //This appends comments to the container-bottom
-    //$('.container-bottom').append(value);
   });
+});
+
+const commentID = window.location.pathname;
+$('.posting').on('click', function() {
+  const myAuthor = $('.my-author').val();
+  const myTitle = $('.my-title').val();
+  const myContent = $('.my-content').val();
+
+  console.log(myAuthor, myTitle, myContent);
+  $.ajax({
+    url: '/topics',
+    data: JSON.stringify({
+      author: myAuthor,
+      title: myTitle,
+      content: myContent,
+    }),
+    type: 'POST',
+    contentType: 'application/json',
+  });
+});
+
+
+$(document).on('click', '.send', function() {
+    //event.preventDefault();
+  const userComment = $('.user-comment').val();
+  const userAuthor = $('.user-comment').val();
+  const userTitle = $('.user-comment').val();
+    //console.log('this button is clicked');
+    //value is the user input
+    //insert value to database
+    //http://localhost:8080/topics/5915000734418f3dc4398ee4
+    //http://localhost:8080/topics/5915000734418f3dc4398ee4
+  fetch('http://localhost:8080/topics', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({
+      author: userAuthor,
+      title: userTitle,
+      content: userComment,
+    }),
+  }).then(res => {
+    return res.json();
+  });
+
 });
 
 //on click of create button
@@ -115,9 +129,12 @@ const topicHTML = `  <div class="container">
 const topic_idHTML = `<div class="row">
                       <div class="container-left col-md-8"></div>
                       <div class="container-right col-md-4">
+                      <button class="delete">DELETE</button>
                         <section class="comments-section">
                           <h1>Comments</h1>
-                          <input type="textarea" class="user-comment">
+                          <input type="textarea" class="user-author"placeholder="enter your name...">
+                          <input type="textarea" placeholder="enter the title"class="user-title">
+                          <input type="textarea" class="user-comment"placeholder="enter your comment">
                           <input type="submit" value="submit" class="send"></input>
                         </section>
                       </div>
