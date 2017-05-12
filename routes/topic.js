@@ -13,6 +13,10 @@ router.get('/topics/:topic_id', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/topic_id.html'));
 });
 
+router.get('/post', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/post.html'));
+});
+
 //to identify that its meant for BE; just to display data
 router.get('/api/topics/:topic_id', (req, res) => {
   AdviceEntry
@@ -48,6 +52,10 @@ router.get('/topics/:id', (req, res) => {
     });
 });
 
+// router.post('/myPosts', (req, res) => {
+
+// });
+
 router.post('/topics', (req, res) => {
   const requiredFields = ['author', 'title', 'content'];
 
@@ -73,34 +81,28 @@ router.post('/topics', (req, res) => {
     });
 });
 
-router.post('/comments', (req, res) => {
-  Comment.create({comment: req.body.comment}).then(comment => res.json(comment));
-});
-
-
 //put request for adding comments to topics
 
 router.put('/topics/:id', (req, res) => {
-  const requiredFields = ['author', 'title', 'content'];
+ // const requiredFields = ['author', 'title', 'content'];
 
-  for (let i = 0; i < requiredFields.length; i++) {
+  /*for (let i = 0; i < requiredFields.length; i++) {
     const require = requiredFields[i];
     if (!(require in req.body)) {
       res.status(400).send(`Missing ${require} field.`);
     }
   }
-
-  AdviceEntry.findByIdAndUpdate(req.params.id,
-    { $set: {
-      title: req.body.title,
-      content: req.body.content,
-      author: req.body.author
+*/
+  AdviceEntry
+  .findByIdAndUpdate(req.params.id,
+    { $push: {
+      comments: req.body.comment
     }},
     { new: true }
   )
   .exec()
   .then(updated => {
-    res.status(201).json(updated);
+    res.status(200).json(updated);
   })
     .catch(err => {
       console.error(err);

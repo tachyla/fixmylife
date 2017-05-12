@@ -53,7 +53,6 @@ fetch('https://reddit.com/r/relationships.json?limit=10')
       .catch(err => {
         err;
       });
-
   });
 
 //Server functions

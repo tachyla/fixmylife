@@ -11,8 +11,6 @@ $(document).ready(function() {
       $('.questions').append(questionHTML);
     }
   });
-  //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
-  //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
   $.getJSON('/api' + window.location.pathname, function(results) {
     $('.one-topic').append(topic_idHTML);
     //results is the object
@@ -21,24 +19,49 @@ $(document).ready(function() {
     $('.container-left').append(content);
   });
 
+  $('.posting').on('click', function() {
+    const myAuthor = $('.my-author').val();
+    const myTitle = $('.my-title').val();
+    const myContent = $('.my-content').val();
+    $.ajax({
+      url: '/topics',
+      data: JSON.stringify({
+        author: myAuthor,
+        title: myTitle,
+        content: myContent,
+      }),
+      type: 'POST',
+      contentType: 'application/json',
+    });
+  });
+
   const commentID = window.location.pathname;
-  $('.send').on('click', function() {
+
+  $(document).on('click', '.send', function() {
     //event.preventDefault();
     const value = $('.user-comment').val();
+    //console.log('this button is clicked');
     //value is the user input
     //insert value to database
-
-/*    fetch(`/api${commentID}`, {
-      method: 'PUT',
+//http://localhost:8080/topics/5915000734418f3dc4398ee4
+//http://localhost:8080/topics/5915000734418f3dc4398ee4
+    fetch('http://localhost:8080/topics', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        author: 'Tee',
+        title: 'You can do it!',
+        content: value
+      }),
     }).then(res => {
-      const waka = $('.user-comment').val();
-      console.log('This is value:', value);
-      console.log('This is waka:', waka);
-      AdviceEntry.update({ comment: value });
+      return res.json();
     });
-*/
+
     //This appends comments to the container-bottom
-    $('.container-bottom').append(value);
+    //$('.container-bottom').append(value);
   });
 });
 
@@ -86,7 +109,7 @@ const topicHTML = `  <div class="container">
                         <div class="jumbotron">
                           <h1>Fix My Life</h1>
                         <ul class="questions"></ul>
-                        <a href="../post.html"><button class="create-btn">CREATE</button></a>
+                        <a href="/post"><button class="create-btn">CREATE</button></a>
                       </div>`;
 
 const topic_idHTML = `<div class="row">

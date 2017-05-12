@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const adviceEntrySchema = mongoose.Schema({
-  author: {type: String, unique: true},
+  author: String,
   title: String,
-  content: String,
+  content: String
   //This needs to be embedded data
-  comment: [{type: String}]
+  //comment: [{type: String}]
   //store id of comment
   //fetch
   //comment can't be used here because of overwriting issues
