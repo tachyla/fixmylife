@@ -97,6 +97,11 @@ $(document).ready(function() {
 //     data: '{"content": value}',
 //   });
 // });
+const headerHTML = `<div class="container1">
+                      <img src="#" alt="">
+                        <div class="header">
+                          <h1>Fix My Life</h1>
+                      </div>`;
 
 const topicHTML = `  <div class="container1">
                         <div class="jumbotron">

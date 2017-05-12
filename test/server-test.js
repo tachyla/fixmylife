@@ -51,7 +51,7 @@ describe('AdviceEntry API resource unit tests', function() {
     return closeServer();
   });
 
-  describe.only('GET endpoint', function() {
+  describe ('GET endpoint', function() {
     it('should display all existing topics', function() {
       let res;
 
