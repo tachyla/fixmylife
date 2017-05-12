@@ -56,13 +56,12 @@ $(document).ready(function() {
     });
 //(((((((((DELETE)))))))))
 
-  const commentID = window.location.pathname;
 
   });
 
   //CAPTURES USERS POST*******************************************************************************************************
+  const commentID = window.location.pathname;
   const URL = 'http://localhost:8080/topics';
-$.getJSON(`/api` + window.location.pathname, function(results) {
   $(document).on(`click`, `#create`, function(event) {
     event.preventDefault();
     const userPost = $(`.user-post-textarea`).val();
@@ -70,47 +69,49 @@ $.getJSON(`/api` + window.location.pathname, function(results) {
     const userAuthor = $(`.user-author-textarea`).val();
 
     $.ajax({
-      url: URL,
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      data: JSON.stringify({
-        author: userAuthor,
-        title: userTitle,
-        content: userPost,
-      }),
-      type: 'POST',
+        url: URL +'/'+ topicID,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        data: JSON.stringify({
+          author: updatedAuthor,
+          title: updatedTitle,
+          content: updatedTopic,
+          comments: [{comment: comment}]
+        }),
+        type: 'PUT'
     });
   });
-});
 
-});//End of document ready>>>>>>>>>>>>>>>>
+  });
+});
 ////////USER ADVICE//////////////******************************* */
 $(document).on('click', '.send', function(data) {
   //console.log('This is giving advice.');
-  commentID = window.location.pathname;
+  console.log(data);
   let comment = $('.user-comment').val();
   comment = `<li class="advice">${comment}</li>`;
   $('.post-comments').append(comment);
 
   //const commentURL = 'http://localhost:8080//comments'
   $.ajax({
-      url: URL+'/'+commentID,
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      data: JSON.stringify({
-        //Need to pass the required fields
-
-        comments: [{comment: comment}]
-      }),
-      type: 'POST'
-    }).catch(err => console.error(err));
+    url: URL,
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    data: JSON.stringify({
+      author: '',
+      title: '',
+      content: '',
+      comments: [{ comment: comment }]
+    }),
+    type: 'POST'
+  }).catch(err => console.log(err));
 });
 
-const topicHTML = `<div class="container1">
+const topicHTML = `  <div class="container1">
                         <div class="jumbotron">
                           <h1>Trending Topics</h1>
                         <ul class="questions"></ul>

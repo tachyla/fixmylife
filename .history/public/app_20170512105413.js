@@ -106,7 +106,7 @@ $(document).on('click', '.send', function(data) {
 
         comments: [{comment: comment}]
       }),
-      type: 'POST'
+      type: 'PUT'
     }).catch(err => console.error(err));
 });
 

@@ -98,13 +98,14 @@ router.put(`/topics/:id`, (req, res) => {
 
   AdviceEntry.findByIdAndUpdate(
     req.params.id,
-    {      $set: {
+    {
+      $set: {
         title: req.body.title,
         content: req.body.content,
-        author: req.body.author
-      }
+        author: req.body.author,
+      },
     },
-    { new: true }
+    { new: true },
   )
     .exec()
     .then(updated => {

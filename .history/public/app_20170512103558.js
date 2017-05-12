@@ -56,13 +56,12 @@ $(document).ready(function() {
     });
 //(((((((((DELETE)))))))))
 
-  const commentID = window.location.pathname;
 
   });
 
   //CAPTURES USERS POST*******************************************************************************************************
+  const commentID = window.location.pathname;
   const URL = 'http://localhost:8080/topics';
-$.getJSON(`/api` + window.location.pathname, function(results) {
   $(document).on(`click`, `#create`, function(event) {
     event.preventDefault();
     const userPost = $(`.user-post-textarea`).val();
@@ -84,12 +83,10 @@ $.getJSON(`/api` + window.location.pathname, function(results) {
     });
   });
 });
-
-});//End of document ready>>>>>>>>>>>>>>>>
 ////////USER ADVICE//////////////******************************* */
 $(document).on('click', '.send', function(data) {
   //console.log('This is giving advice.');
-  commentID = window.location.pathname;
+  console.log(data);
   let comment = $('.user-comment').val();
   comment = `<li class="advice">${comment}</li>`;
   $('.post-comments').append(comment);
@@ -102,11 +99,9 @@ $(document).on('click', '.send', function(data) {
         Accept: 'application/json',
       },
       data: JSON.stringify({
-        //Need to pass the required fields
-
         comments: [{comment: comment}]
       }),
-      type: 'POST'
+      type: 'PUT'
     }).catch(err => console.error(err));
 });
 
