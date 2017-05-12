@@ -58,7 +58,7 @@ ul li{
 li {
   padding: 10px;
   height: 80px;
-  font-size: 1.2em;
+  font-size: 12;
   border: 1px solid black;
   border-radius: 7%;
   overflow: hidden;
@@ -72,7 +72,7 @@ li {
 
 .user-post-textarea {
   word-wrap: break-word;
-  text-align: center;
+  /*text-align: center;*/
   font-size: 3em;
   height: 500px;
   width: 100%;
@@ -82,5 +82,5 @@ li {
 }
 
 .user-author-textarea {
-  margin: 30px;
+  margin-top: 30px;
 }
