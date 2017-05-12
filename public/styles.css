@@ -1,6 +1,23 @@
 * {
   margin: 0 auto;
   padding: 20px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+#create {
+  margin-top: 100px;
+}
+
+.topicColumn , .postColumn {
+  background: lightsteelblue;
+}
+form {
+  margin: 10px;
+}
+
+
+#postInput {
+height: 1416px;
+width: 100%;
 }
 
 .login-container {
@@ -8,12 +25,13 @@
   border: 1px solid black;
   width: 50%;
   height: 400px;
+  margin-top:100px;
+  background: #7686a0;
 
 }
-.container {
-  margin-top: 60px;
-  width: 65%;
-  background-color: gray;
+.container1, .container2 {
+  text-align: center;
+  border: 15px solid gray;
 }
 
 .container-left {
@@ -22,11 +40,6 @@ border: 1px solid black;
 }
 .container-right, .container-bottom {
   display: block;
-}
-
-
-.jumbotron {
-  margin-top: 25px;
 }
 
 .questions {
@@ -41,7 +54,8 @@ ul li{
 }
 li {
   padding: 10px;
-  height: 100px;
+  height: 80px;
+  font-size: 12;
   border: 1px solid black;
   overflow: hidden;
   white-space: nowrap;

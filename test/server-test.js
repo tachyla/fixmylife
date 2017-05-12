@@ -51,7 +51,7 @@ describe('AdviceEntry API resource unit tests', function() {
     return closeServer();
   });
 
-  describe('GET endpoint', function() {
+  describe.only('GET endpoint', function() {
     it('should display all existing topics', function() {
       let res;
 
@@ -78,22 +78,22 @@ describe('AdviceEntry API resource unit tests', function() {
         .then(results => {
           res = results;
           res.should.have.status(200);
-          res.should.be.json;
-
-          res.body.forEach(function(result) {
-            result.should.be.a('object');
-            result.should.have.any.keys(
-              '_id',
-              '__v',
-              'author',
-              'content',
-              'title'
-            );
-          });
-          return AdviceEntry.count();
-        })
-        .then(count => {
-          res.body.should.have.length.of(count);
+          res.should.be.html;
+          results.text.should.contain('Topics');
+          // res.body.forEach(function(result) {
+          //   result.should.be.a('object');
+          //   result.should.have.any.keys(
+          //     '_id',
+          //     '__v',
+          //     'author',
+          //     'content',
+          //     'title'
+          //   );
+          // });
+        //   return AdviceEntry.count();
+        // })
+        // .then(count => {
+        //   res.body.should.have.length.of(count);
         });
     });
   });

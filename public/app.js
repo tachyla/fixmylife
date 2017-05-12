@@ -1,37 +1,19 @@
-
-const fixMyLife = "http://localhost:8080/";
-
 $(document).ready(function() {
-  function showLogIn () {
-    const loginHTML = `<form class="form-signin">
-                        <h2 class="form-signin-heading">Please sign in</h2>
-                        <label for="inputEmail" class="sr-only">Email address</label>
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                        <label for="inputPassword" class="sr-only">Password</label>
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" value="remember-me"> Remember me
-                          </label>
-                        </div>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                      </form>`;
-                      $('.login-container').append(loginHTML);
-  }
-  showLogIn();
 
   $.getJSON('/api/topics', function(results) {
-    //FIRST APPENDED topicHTML to the dom
-    $('.topicScreen').append(topicHTML);
+    //First append topicHTML to the first column 
+    //Second append postHTML to the second column
+    $('.topicColumn').append(topicHTML);
+    $('.postColumn').append(postHTML);
     for (let i = 0; i < 10; i++) {
       const question = results[i].content;
       const topic_id = results[i]._id;
       const questionHTML = `<a href="/topics/${topic_id}"><li>${question}</li><a/><br>`;
-      //then append the questions to the question class
+      //Third append  questions to the question class
       $('.questions').append(questionHTML);
     }
   });
-  //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
+
   //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
   $.getJSON('/api' + window.location.pathname, function(results) {
     $('.one-topic').append(topic_idHTML);
@@ -62,37 +44,42 @@ $(document).ready(function() {
   });
 });
 
-//on click of create button
-//anchor tag links user to the post.html page
-//target class on html page to append postHTML
-$('.create-btn').on('click', function() {
-  const postHTML = `<input type="textarea" class="user-post-textarea">
-                          <button name="submit-post">SUBMIT</button>`;
-  $('.createScreen').append(postHTML);
-});
-
-$('.submit-post').on('click', function() {
-  const value = $('.user-post-textarea').val();
-  //insert value to database
-
-  //append comment to post
-  $('.post-comments').append(`<li>${value}</li>`);
-
-  fetch({
-    method: 'POST',
-    dataType: 'json',
-    url: 'http://localhost:8080/topics',
-    data: '{"content": value}',
-  });
-});
 
 
-const topicHTML = `  <div class="container">
+
+
+// $('.submit-post').on('click', function() {
+//   const value = $('.user-post-textarea').val();
+//   //insert value to database
+
+//   //append comment to post
+//   $('.post-comments').append(`<li>${value}</li>`);
+
+//   fetch({
+//     method: 'POST',
+//     dataType: 'json',
+//     url: 'http://localhost:8080/topics',
+//     data: '{"content": value}',
+//   });
+// });
+
+
+
+const topicHTML = `  <div class="container1">
                         <div class="jumbotron">
-                          <h1>Fix My Life</h1>
+                          <h1>Trending Topics</h1>
                         <ul class="questions"></ul>
-                        <a href="../post.html"><button class="create-btn">CREATE</button></a>
                       </div>`;
+
+  const postHTML = `<div class="container2">
+                      <div class="jumbotron">
+                        <h1>Post A Topic</h1>
+                      <form id="post-container">
+                        <input type="textarea" id="postInput" class="user-post-textarea" required><br>
+                      <button id="create">CREATE</button>
+                    </form>
+                    </div>
+                  </div>`;
 
 const topic_idHTML = `<div class="row">
                       <div class="container-left col-md-8"></div>
