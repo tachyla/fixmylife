@@ -25,11 +25,13 @@ $(document).ready(function() {
   //CAPTURES USERS POST*******************************************************************************************************
   const commentID = window.location.pathname;
   const URL = 'http://localhost:8080/topics';
+  //const URL = `http://mongodb:localhost/test`;
   $(document).on(`click`, `#create`, function(event) {
     event.preventDefault();
     const userPost = $(`.user-post-textarea`).val();
     const userTitle = $(`.user-title-textarea`).val();
     const userAuthor = $(`.user-author-textarea`).val();
+
 
     $.ajax({
       url: URL,

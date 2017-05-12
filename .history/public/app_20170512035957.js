@@ -24,15 +24,17 @@ $(document).ready(function() {
 
   //CAPTURES USERS POST*******************************************************************************************************
   const commentID = window.location.pathname;
-  const URL = 'http://localhost:8080/topics';
+  const URL = 'https://mongodb://tachyla:123@ds133281.mlab.com:33281/fixmylife';
+  //const URL = `http://mongodb:localhost/test`;
   $(document).on(`click`, `#create`, function(event) {
     event.preventDefault();
     const userPost = $(`.user-post-textarea`).val();
     const userTitle = $(`.user-title-textarea`).val();
     const userAuthor = $(`.user-author-textarea`).val();
 
+
     $.ajax({
-      url: URL,
+      url: 'http://localhost:8080/topics',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'

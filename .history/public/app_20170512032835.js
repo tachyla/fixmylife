@@ -1,5 +1,8 @@
 $(document).ready(function() {
-    $.getJSON(`/api/topics`, function(results) {
+  $().on(``);
+
+
+  $.getJSON(`/api/topics`, function(results) {
     //First append topicHTML to the first column
     //Second append postHTML to the second column
     $(`.topicColumn`).append(topicHTML);
@@ -23,15 +26,34 @@ $(document).ready(function() {
   });
 
   //CAPTURES USERS POST*******************************************************************************************************
-  const commentID = window.location.pathname;
-  const URL = 'http://localhost:8080/topics';
+  //const commentID = window.location.pathname;
+  const URL = 'https://mongodb://tachyla:123@ds133281.mlab.com:33281/fixmylife';
+  //const URL = `https://mongodb:localhost`;
   $(document).on(`click`, `#create`, function(event) {
     event.preventDefault();
     const userPost = $(`.user-post-textarea`).val();
     const userTitle = $(`.user-title-textarea`).val();
     const userAuthor = $(`.user-author-textarea`).val();
 
-    $.ajax({
+  function postTopic() {
+    return fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        title: userTitle,
+        author: userAuthor,
+        content: userPost
+      })
+    }).then(function(res) {
+      return res.json();
+    })
+    .catch(err => console.error(err));
+  }
+  postTopic();
+    /*$.ajax({
       url: URL,
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +65,7 @@ $(document).ready(function() {
         content: userPost
       }),
       type: 'POST'
-    })
+    })*/
   });
 
 });
