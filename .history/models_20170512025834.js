@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const adviceEntrySchema = mongoose.Schema({
-  author: String,
+  author: type: String,
   title: String,
   content: String,
   //This needs to be embedded data

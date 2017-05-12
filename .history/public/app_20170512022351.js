@@ -1,6 +1,4 @@
 $(document).ready(function() {
-  $().on(``);
-
 
   $.getJSON(`/api/topics`, function(results) {
     //First append topicHTML to the first column
@@ -25,31 +23,25 @@ $(document).ready(function() {
     $(`.container-left`).append(content);
   });
 
-  //CAPTURES USERS POST*******************************************************************************************************
-  //const commentID = window.location.pathname;
-  const URL = `http://mongodb://tachyla:123@ds133281.mlab.com:33281/fixmylife`;
-  $(document).on(`click`, `#create`, function(event) {
-    event.preventDefault();
-    const userPost = $(`.user-post-textarea`).val();
-    const userTitle = $(`.user-title-textarea`).val();
-    const userAuthor = $(`.user-author-textarea`).val();
+  const commentID = window.location.pathname;
+  $(`.send`).on(`click`, function() {
+    //event.preventDefault();
+    const value = $(`.user-comment`).val();
+    //value is the user input
+    //insert value to database
 
-    fetch(URL, {
-      method: `POST`,
-      headers: {
-        'Content-Type': `application/json`,
-        'Accept': `application/json`
-      },
-      body: JSON.stringify({
-        author: userAuthor,
-        title: userTitle,
-        post: userPost
-      })
-    }).then( res => {
-      return res.json();
-    }).catch(err => console.log(err));
+/*    fetch(`/api${commentID}`, {
+      method: 'PUT',
+    }).then(res => {
+      const waka = $('.user-comment').val();
+      console.log('This is value:', value);
+      console.log('This is waka:', waka);
+      AdviceEntry.update({ comment: value });
+    });
+*/
+    //This appends comments to the container-bottom
+    $(`.container-bottom`).append(value);
   });
-
 });
 
 
@@ -83,9 +75,7 @@ const postHTML = `<div class="container2">
                       <div class="jumbotron">
                         <h1>Post A Topic</h1>
                       <form id="post-container">
-                        <input type="textarea" id="userPost" class="user-post-textarea" placeholder="Write your question"><br>
-                        <input type="textarea" id="userAuthor" class="user-author-textarea" placeholder="Who are you"><br>
-                        <input type="textarea" id="userTitle" class="user-title-textarea" placeholder="Give me a title"><br>
+                        <input type="textarea" id="postInput" class="user-post-textarea"><br>
                       <button id="create" class="btn btn-primary">CREATE</button>
                     </form>
                     </div>

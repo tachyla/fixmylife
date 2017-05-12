@@ -26,15 +26,14 @@ $(document).ready(function() {
   });
 
   //CAPTURES USERS POST*******************************************************************************************************
-  //const commentID = window.location.pathname;
-  const URL = `http://mongodb://tachyla:123@ds133281.mlab.com:33281/fixmylife`;
+  const commentID = window.location.pathname;
   $(document).on(`click`, `#create`, function(event) {
     event.preventDefault();
     const userPost = $(`.user-post-textarea`).val();
     const userTitle = $(`.user-title-textarea`).val();
     const userAuthor = $(`.user-author-textarea`).val();
 
-    fetch(URL, {
+    fetch(`/api/topics`, {
       method: `POST`,
       headers: {
         'Content-Type': `application/json`,

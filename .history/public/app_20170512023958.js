@@ -26,30 +26,25 @@ $(document).ready(function() {
   });
 
   //CAPTURES USERS POST*******************************************************************************************************
-  //const commentID = window.location.pathname;
-  const URL = `http://mongodb://tachyla:123@ds133281.mlab.com:33281/fixmylife`;
+  const commentID = window.location.pathname;
   $(document).on(`click`, `#create`, function(event) {
     event.preventDefault();
     const userPost = $(`.user-post-textarea`).val();
     const userTitle = $(`.user-title-textarea`).val();
     const userAuthor = $(`.user-author-textarea`).val();
 
-    fetch(URL, {
+    fetch(`/api${commentID}`, {
       method: `POST`,
-      headers: {
-        'Content-Type': `application/json`,
-        'Accept': `application/json`
-      },
-      body: JSON.stringify({
-        author: userAuthor,
-        title: userTitle,
-        post: userPost
-      })
-    }).then( res => {
-      return res.json();
-    }).catch(err => console.log(err));
-  });
+    }).then(res => {
+      const waka = $(`.user-comment`).val();
+      console.log(`This is value:`, value);
+      console.log(`This is waka:`, waka);
+      AdviceEntry.update({ comment: value });
+    });
 
+    //This appends comments to the container-bottom
+    //$(`.container-bottom`).append(value);
+  });
 });
 
 
