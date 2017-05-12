@@ -26,7 +26,7 @@ $(document).ready(function() {
     const content = results.content;
 
     $(`.container-left`).append(content);
-//****UPDATE**********
+
     $('.update').on('click', function() {
       const updatedTopic = $('.updating').val();
       console.log(updatedTopic);

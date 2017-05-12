@@ -26,21 +26,21 @@ $(document).ready(function() {
     const content = results.content;
 
     $(`.container-left`).append(content);
-//****UPDATE**********
+
     $('.update').on('click', function() {
       const updatedTopic = $('.updating').val();
       console.log(updatedTopic);
       $('.container-left').text(updatedTopic);
 
       $.ajax({
-        url: URL +'/'+ topicID,
+        url: URL + topicID,
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
         data: JSON.stringify({
-          author: updatedAuthor,
-          title: updatedTitle,
+          author: result.author,
+          title: result.title,
           content: updatedTopic
         }),
         type: 'PUT',

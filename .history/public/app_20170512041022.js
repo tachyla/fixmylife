@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $.getJSON(`/api/topics`, function(results) {
+    $.getJSON(`/api/topics`, function(results) {
     //First append topicHTML to the first column
     //Second append postHTML to the second column
     $(`.topicColumn`).append(topicHTML);
@@ -12,40 +12,14 @@ $(document).ready(function() {
       $(`.questions`).append(questionHTML);
     }
   });
-  //UPDATE and DELETE**********************************************************************************************************
+//UPDATE and DELETE**********************************************************************************************************
   //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
   $.getJSON(`/api` + window.location.pathname, function(results) {
-    //results is entire object
-
-    //one-topic is entire DOM
     $(`.one-topic`).append(topic_idHTML);
-
-    const topicID = results._id;
-    const updatedAuthor= results.author;
-    const updatedTitle = results.title;
+    //results is the object
     const content = results.content;
-
+    const comment = results.comment;
     $(`.container-left`).append(content);
-//****UPDATE**********
-    $('.update').on('click', function() {
-      const updatedTopic = $('.updating').val();
-      console.log(updatedTopic);
-      $('.container-left').text(updatedTopic);
-
-      $.ajax({
-        url: URL +'/'+ topicID,
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        data: JSON.stringify({
-          author: updatedAuthor,
-          title: updatedTitle,
-          content: updatedTopic
-        }),
-        type: 'PUT',
-      });
-    });
   });
 
   //CAPTURES USERS POST*******************************************************************************************************
@@ -61,16 +35,17 @@ $(document).ready(function() {
       url: URL,
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Accept': 'application/json'
       },
       data: JSON.stringify({
         author: userAuthor,
         title: userTitle,
-        content: userPost,
+        content: userPost
       }),
-      type: 'POST',
-    });
+      type: 'POST'
+    })
   });
+
 });
 // $('.submit-post').on('click', function() {
 //   const value = $('.user-post-textarea').val();

@@ -21,30 +21,26 @@ $(document).ready(function() {
     $(`.one-topic`).append(topic_idHTML);
 
     const topicID = results._id;
-    const updatedAuthor= results.author;
-    const updatedTitle = results.title;
     const content = results.content;
 
     $(`.container-left`).append(content);
-//****UPDATE**********
+
     $('.update').on('click', function() {
       const updatedTopic = $('.updating').val();
       console.log(updatedTopic);
-      $('.container-left').text(updatedTopic);
+      $('.container-left').append(updatedTopic);
 
-      $.ajax({
-        url: URL +'/'+ topicID,
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        data: JSON.stringify({
-          author: updatedAuthor,
-          title: updatedTitle,
-          content: updatedTopic
-        }),
-        type: 'PUT',
-      });
+         $.ajax({
+         url: URL+topicID,
+         headers: {
+           'Content-Type': 'application/json',
+           'Accept': 'application/json'
+         },
+         data: JSON.stringify({
+           content: userPost
+         }),
+         type: 'PUT'
+      // })
     });
   });
 
