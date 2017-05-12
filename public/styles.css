@@ -8,13 +8,8 @@
 }
 
 .topicColumn , .postColumn {
-  background: lightsteelblue;  
-  
+  background: lightsteelblue;
 }
-
-/*.postColumn {
-  padding-top: 100px;
-}*/
 form {
   margin: 10px;
 }
@@ -34,16 +29,13 @@ width: 100%;
   background: #7686a0;
 
 }
-
 .container1, .container2 {
   text-align: center;
   border-radius: 2%;
   border: 15px solid gray;
 }
 .container2 {
-  /*height: 100%*/
-  padding-top: 100px;
-  height: 1833px;
+  height: 1733px;
 }
 .container-left {
 text-align: center;
@@ -67,12 +59,11 @@ li {
   padding: 10px;
   height: 80px;
   font-size: 1.2em;
-  border: 1px solid lightgray;
+  border: 1px solid black;
   border-radius: 7%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  background: darkgray;
 }
 
 .center {

@@ -101,22 +101,6 @@ $(document).on('click', '.send', function(data) {
   comment = `<li class="advice">${advice}</li>`;
   $('.post-comments').append(comment);
 
-<<<<<<< HEAD
-//   fetch({
-//     method: 'POST',
-//     dataType: 'json',
-//     url: 'http://localhost:8080/topics',
-//     data: '{"content": value}',
-//   });
-// });
-const headerHTML = `<div class="container1">
-                      <img src="#" alt="">
-                        <div class="header">
-                          <h1>Fix My Life</h1>
-                      </div>`;
-
-const topicHTML = `  <div class="container1">
-=======
   //const commentURL = 'http://localhost:8080//comments'
   $.ajax({
       url: 'http://localhost:8080/comments',
@@ -134,7 +118,6 @@ const topicHTML = `  <div class="container1">
 const num = Math.floor(Math.random() * 20);
 console.log(num);
 const topicHTML = `<div class="container1">
->>>>>>> refs/remotes/origin/master
                         <div class="jumbotron">
                           <h1>Trending Topics</h1>
                         <ul class="questions"></ul>
