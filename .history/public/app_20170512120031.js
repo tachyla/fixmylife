@@ -19,11 +19,11 @@ $(document).ready(function() {
   $.getJSON('/api/comments', function(advice) {
     for(let i = 0; i < advice.length; i++) {
       const comment = `<li>${advice[i].comment}</li>`;
-      $('.post-comments').append(comment);
+      $('.post-comments').text(comment);
     }
   })
 
-    //$('.post-comments').prepend('This is where the comments go!');
+    $('.post-comments').append('This is where the comments go!');
     //one-topic is entire DOM
     $(`.one-topic`).append(topic_idHTML);
 

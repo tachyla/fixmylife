@@ -23,7 +23,7 @@ $(document).ready(function() {
     }
   })
 
-    //$('.post-comments').prepend('This is where the comments go!');
+    $('.post-comments').append('This is where the comments go!');
     //one-topic is entire DOM
     $(`.one-topic`).append(topic_idHTML);
 

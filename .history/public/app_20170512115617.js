@@ -4,6 +4,7 @@ $(document).ready(function() {
     //Second append postHTML to the second column
     $(`.topicColumn`).append(topicHTML);
     $(`.postColumn`).append(postHTML);
+    //$('.post-comments').append('This is where the comments go!');
     for (let i = 0; i < 10; i++) {
       const question = results[i].content;
       const topic_id = results[i]._id;
@@ -12,18 +13,17 @@ $(document).ready(function() {
       $(`.questions`).append(questionHTML);
     }
   });
+  $.getJSON('/api/comments', function(advice) {
+    for(let i = 0; i < advice.length; i++) {
+      const comment = `<li>${advice[i].comment}</li>`;
+      $('.post-comments').text(comment);
+    }
+  })
   //UPDATE and DELETE**********************************************************************************************************
   //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
   $.getJSON(`/api` + window.location.pathname, function(results) {
     //results is entire object
-  $.getJSON('/api/comments', function(advice) {
-    for(let i = 0; i < advice.length; i++) {
-      const comment = `<li>${advice[i].comment}</li>`;
-      $('.post-comments').append(comment);
-    }
-  })
 
-    //$('.post-comments').prepend('This is where the comments go!');
     //one-topic is entire DOM
     $(`.one-topic`).append(topic_idHTML);
 

@@ -12,18 +12,20 @@ $(document).ready(function() {
       $(`.questions`).append(questionHTML);
     }
   });
+  $.getJSON('/api/comments', function(advice) {
+    //console.log(advice[0]);
+
+    for(let i = 0; i < advice.length; i++) {
+      const comment = `<li>${advice[i].comment}</li>`;
+      //console.log(comment);
+      $('.user-comments').append(comment);
+    }
+  })
   //UPDATE and DELETE**********************************************************************************************************
   //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
   $.getJSON(`/api` + window.location.pathname, function(results) {
     //results is entire object
-  $.getJSON('/api/comments', function(advice) {
-    for(let i = 0; i < advice.length; i++) {
-      const comment = `<li>${advice[i].comment}</li>`;
-      $('.post-comments').append(comment);
-    }
-  })
 
-    //$('.post-comments').prepend('This is where the comments go!');
     //one-topic is entire DOM
     $(`.one-topic`).append(topic_idHTML);
 
