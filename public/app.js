@@ -1,30 +1,25 @@
 $(document).ready(function() {
   $.getJSON(`/api/topics`, function(results) {
-    //First append topicHTML to the first column
-    //Second append postHTML to the second column
     $(`.topicColumn`).append(topicHTML);
     $(`.postColumn`).append(postHTML);
     for (let i = 0; i < 10; i++) {
       const question = results[i].content;
       const topic_id = results[i]._id;
       const questionHTML = `<a href="/topics/${topic_id}"><li>${question}</li><a/><br>`;
-      //Third append  questions to the question class
       $(`.questions`).append(questionHTML);
     }
   });
   //UPDATE and DELETE**********************************************************************************************************
   //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
   $.getJSON(`/api` + window.location.pathname, function(results) {
-    //results is entire object
+    //results object
   $.getJSON('/api/comments', function(advice) {
     for(let i = 0; i < advice.length; i++) {
       const comment = `<li>${advice[i].comment}</li>`;
       $('.post-comments').append(comment);
     }
-  })
+  });
 
-    //$('.post-comments').prepend('This is where the comments go!');
-    //one-topic is entire DOM
     $(`.one-topic`).append(topic_idHTML);
 
     const topicID = results._id;
@@ -70,6 +65,7 @@ $(document).ready(function() {
   //CAPTURES USERS POST*******************************************************************************************************
   const URL = 'http://localhost:8080/topics';
 $.getJSON(`/api` + window.location.pathname, function(results) {
+  //tk-targeting the document, on the click of #create id, run event prevent default and to the ajax call on line 82
   $(document).on(`click`, `#create`, function(event) {
     event.preventDefault();
     const userPost = $(`.user-post-textarea`).val();
