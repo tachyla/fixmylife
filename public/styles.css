@@ -3,64 +3,71 @@
   padding: 20px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
-#create {
-  margin-top: 100px;
+
+body{
+    background: #383661;
 }
 
-.topicColumn , .postColumn {
-  background: lightsteelblue;
+.jumbotron > h1 {
+  color: #9695AD;
 }
+
+.jumbotron > a {
+  list-style: none;
+  color: #9695AD;
+}
+
+.jumbotron {
+  background: transparent;
+}
+
+#create {
+  margin-top: 40px;
+  width: 20%;
+  background: #F3C677;
+  color: #383661;
+  font-weight: bolder;
+  font-size: 22px;
+}
+
 form {
   margin: 10px;
 }
-
 
 #postInput {
 height: 1416px;
 width: 100%;
 }
 
-.login-container {
-  text-align: center;
-  border: 1px solid black;
-  width: 50%;
-  height: 400px;
-  margin-top:100px;
-  background: #7686a0;
-
-}
 .container1, .container2 {
   text-align: center;
-  border-radius: 2%;
-  border: 15px solid gray;
 }
+
 .container2 {
-  height: 1733px;
+  padding-top: 200px;
 }
+
 .container-left {
 text-align: center;
-border: 1px solid black;
 }
+
 .container-right, .container-bottom {
   display: block;
 }
 
-.questions {
+.questions > ul {
   margin: none;
-  font-size: 2em;
 }
 
 ul li{
   list-style: none;
   width: 100%;
-
 }
+
 li {
-  padding: 10px;
-  height: 80px;
-  font-size: 1.2em;
-  border: 1px solid black;
-  border-radius: 7%;
+  height: 60px;
+  font-size: 18px;;
+  background: #F3C677;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -73,14 +80,45 @@ li {
 .user-post-textarea {
   word-wrap: break-word;
   text-align: center;
-  font-size: 3em;
+  font-size: 20px;
   height: 500px;
   width: 100%;
   border-radius: 2%;
-  background-color: lightgoldenrodyellow;
+  background-color: white;
   margin-bottom: 20px;
 }
 
 .user-author-textarea {
   margin: 30px;
 }
+
+
+/*===Mobile view===*/
+@media screen and (min-width: 320px) {
+
+  .container1,
+  .container2 {
+    width: 100%
+    }
+  .container2 {
+    padding: 0;
+    }
+
+  #create {
+  margin-top: 40px;
+  width: 35%;
+}
+}
+
+/*===tablet view===*/
+@media screen and (min-width: 600px) {
+
+  .container1,
+  .container2 {
+    width: 100%
+    }
+    .container2 {
+      padding: 0;
+    }
+}
+
