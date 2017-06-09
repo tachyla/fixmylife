@@ -8,6 +8,10 @@ body{
     background: #383661;
 }
 
+a {
+  color: #383661;
+}
+
 .jumbotron > h1 {
   color: #9695AD;
 }
@@ -44,7 +48,7 @@ width: 100%;
 }
 
 .container2 {
-  padding-top: 200px;
+  margin-top: 150px;
 }
 
 .container-left {
