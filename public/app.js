@@ -1,38 +1,38 @@
 $(document).ready(function() {
-  $.getJSON(`/api/topics`, function(results) {
-    $(`.topicColumn`).append(topicHTML);
-    $(`.postColumn`).append(postHTML);
+  $.getJSON('/api/topics', function(results) {
+    $('.topicColumn').append(topicHTML);
+    $('.postColumn').append(postHTML);
     for (let i = 0; i < 10; i++) {
       const question = results[i].content;
       const topic_id = results[i]._id;
       const questionHTML = `<a href="/topics/${topic_id}"><li>${question}</li><a/><br>`;
-      $(`.questions`).append(questionHTML);
+      $('.questions').append(questionHTML);
     }
   });
   //UPDATE and DELETE**********************************************************************************************************
   //http://localhost:8080/topics/5914cbd4096e8c0db8e49ad1
-  $.getJSON(`/api` + window.location.pathname, function(results) {
+  $.getJSON('/api' + window.location.pathname, function(results) {
     //results object
-  $.getJSON('/api/comments', function(advice) {
+    $.getJSON('/api/comments', function(advice) {
     for(let i = 0; i < advice.length; i++) {
       const comment = `<li>${advice[i].comment}</li>`;
       $('.post-comments').append(comment);
     }
   });
 
-    $(`.one-topic`).append(topic_idHTML);
+    $('.one-topic').append(topic_idHTML);
 
     const topicID = results._id;
     const updatedAuthor= results.author;
     const updatedTitle = results.title;
     const content = results.content;
 
-    $(`.container-left`).append(content);
+    $('.topic-container').append(content);
 //****UPDATE**********
     $('.update').on('click', function() {
       const updatedTopic = $('.updating').val();
       console.log(updatedTopic);
-      $('.container-left').text(updatedTopic);
+      $('.topic-container').text(updatedTopic);
 
       $.ajax({
         url: URL +'/'+ topicID,
@@ -58,19 +58,19 @@ $(document).ready(function() {
     });
 //(((((((((DELETE)))))))))
 
-  const commentID = window.location.pathname;
+    const commentID = window.location.pathname;
 
   });
 
-  //CAPTURES USERS POST*******************************************************************************************************
+  //CAPTURES USERS POST
   const URL = 'http://localhost:8080/topics';
-$.getJSON(`/api` + window.location.pathname, function(results) {
+  $.getJSON('/api' + window.location.pathname, function(results) {
   //tk-targeting the document, on the click of #create id, run event prevent default and to the ajax call on line 82
-  $(document).on(`click`, `#create`, function(event) {
+  $(document).on('click', '#create', function(event) {
     event.preventDefault();
-    const userPost = $(`.user-post-textarea`).val();
-    const userTitle = $(`.user-title-textarea`).val();
-    const userAuthor = $(`.user-author-textarea`).val();
+    const userPost = $('.user-post-textarea').val();
+    const userTitle = $('.user-title-textarea').val();
+    const userAuthor = $('.user-author-textarea').val();
 
     $.ajax({
       url: URL,
@@ -89,28 +89,31 @@ $.getJSON(`/api` + window.location.pathname, function(results) {
 });
 
 });//End of document ready>>>>>>>>>>>>>>>>
-////////USER ADVICE//////////////******************************* */
+
+//CAPTURES USER ADVICE 
 $(document).on('click', '.send', function(data) {
   //console.log('This is giving advice.');
   commentID = window.location.pathname;
   let advice = $('.user-comment').val();
   comment = `<li class="advice">${advice}</li>`;
-  $('.post-comments').append(comment);
+  $('.post-comments').prepend(comment);
+  $('#commentField').val('');
 
   //const commentURL = 'http://localhost:8080//comments'
   $.ajax({
-      url: 'http://localhost:8080/comments',
-      headers: {
+    url: 'http://localhost:8080/comments',
+    headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
-      data: JSON.stringify({
+    data: JSON.stringify({
         //Need to pass the required fields
         comment: advice
       }),
-      type: 'POST'
-    }).catch(err => console.error(err));
+    type: 'POST'
+  }).catch(err => console.error(err));
 });
+
 const num = Math.floor(Math.random() * 20);
 console.log(num);
 const topicHTML = `<div class="container1">
@@ -132,11 +135,12 @@ const postHTML = `<div class="container2">
                   </div>`;
 //FOCUS on a single topic**********************************************
 const topic_idHTML = `<div class="row">
-                      <div class="container-left col-md-8"></div><span class="badge">${num}</span>
-                      <div class="container-right col-md-4">
+                      <div class="topic-container"></div><span class="badge">${num}</span>
+
+                      <div class="advice-container">
                         <section class="comments-section">
                           <h1>Give Advice</h1>
-                          <input type="textarea" class="user-comment">
+                          <input type="textarea" placeholder="enter advice here" id="commentField" class="user-comment">
                           <input type="submit" value="submit" class="send"></input>
                         </section>
                       </div>
