@@ -81,6 +81,12 @@ li {
   text-align: center;
 }
 
+.topic-container {
+  text-align: center;
+  color: #F3C677;
+  font-weight: 18px;
+}
+
 .user-post-textarea {
   word-wrap: break-word;
   text-align: center;
@@ -90,6 +96,14 @@ li {
   border-radius: 2%;
   background-color: white;
   margin-bottom: 20px;
+}
+
+.comments-section > h1 {
+  color: #9695AD;
+}
+
+.comments-section > input {
+    background:#F3C677;
 }
 
 .user-author-textarea {
