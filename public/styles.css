@@ -1,6 +1,5 @@
 * {
   margin: 0 auto;
-  /* padding: 20px; */
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
@@ -21,16 +20,11 @@ a {
   font-size: 22px;
 }
 
-/* form {
-  margin: 0 auto;
-} */
-
 #post-container {
 height: 300px;
 width: 70%;
 margin: 0 auto;
 }
-
 
 .container1, .container2 {
   text-align: center;
@@ -66,8 +60,6 @@ li {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  /* margin-top: 10px;
-  margin-bottom: 10px; */
 }
 
 .center {
@@ -131,12 +123,28 @@ li {
 /*===tablet view===*/
 @media screen and (min-width: 600px) {
 
-  .container1,
-  .container2 {
-    width: 100%
-    }
-    .container2 {
-      padding: 0;
-    }
+  h1 {
+    font-size: 24px;
+  }
+
+  h1,
+  h3 {
+    text-align: center;
+  }
+
+  ul li {
+    width: 90%;
+    font-size: 20px;
+    height: 50px;
+    padding-bottom: 5px;
+    opacity: .8;
+  }
+
+  #create {
+    margin-top: 40px;
+    width: 35%;
+  }
 }
+
+
 
