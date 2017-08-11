@@ -124,7 +124,7 @@ const topicHTML = `<div class="container1">
                         <input type="textarea" id="userPost" class="user-post-textarea" placeholder="Share your Issue"><br>
                         <input type="textarea" id="userAuthor" class="user-author-textarea" placeholder="Name"><br>
                         <input type="textarea" id="userTitle" class="user-title-textarea" placeholder="Title"><br>
-                      <button id="create" class="btn btn-lg btn-primary">REAL</button>
+                      <button id="create" class="btn btn-lg btn-primary">Post</button>
                     </form>
                     </div>
 
