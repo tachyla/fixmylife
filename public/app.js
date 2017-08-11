@@ -1,11 +1,10 @@
 $(document).ready(function() {
   $.getJSON('/api/topics', function(results) {
     $('.topicColumn').append(topicHTML);
-    $('.postColumn').append(postHTML);
     for (let i = 0; i < 10; i++) {
       const question = results[i].content;
       const topic_id = results[i]._id;
-      const questionHTML = `<a href="/topics/${topic_id}"><li>${question}</li><a/><br>`;
+      const questionHTML = `<a href="/topics/${topic_id}"><li class="list-group-item">${question}</li><a/>`;
       $('.questions').append(questionHTML);
     }
   });
@@ -115,28 +114,34 @@ $(document).on('click', '.send', function(data) {
 });
 
 const num = Math.floor(Math.random() * 20);
-console.log(num);
-const topicHTML = `<div class="container1">
-                        <div class="jumbotron">
-                          <h1>Trending Topics</h1>
-                        <ul class="questions"></ul>
-                      </div>`;
 
-const postHTML = `<div class="container2">
+const topicHTML = `<div class="container1">
+                    <div class="topic-header">
                       <div class="jumbotron">
-                        <h1>Post A Topic</h1>
-                      <form id="post-container">
-                        <input type="textarea" id="userPost" class="user-post-textarea" placeholder="Write your question"><br>
-                        <input type="textarea" id="userAuthor" class="user-author-textarea" placeholder="Who are you"><br>
-                        <input type="textarea" id="userTitle" class="user-title-textarea" placeholder="Give me a title"><br>
-                      <button id="create" class="btn btn-primary">CREATE</button>
+                        <h1>Fix My Life</h1>
+                        <p>We've all got problems, share the solutions!</p>
+                        <form id="post-container">
+                        <input type="textarea" id="userPost" class="user-post-textarea" placeholder="Share your Issue"><br>
+                        <input type="textarea" id="userAuthor" class="user-author-textarea" placeholder="Name"><br>
+                        <input type="textarea" id="userTitle" class="user-title-textarea" placeholder="Title"><br>
+                      <button id="create" class="btn btn-lg btn-primary">REAL</button>
                     </form>
                     </div>
+
+                    <ul class="questions"></ul>
                   </div>`;
+
+const postHTML = `<div class="container2">
+                      <div>
+                        
+                    </div>
+                  </div>`;
+
+                  //////
+                  //////
 //FOCUS on a single topic**********************************************
 const topic_idHTML = `<div class="row">
-                      <div class="topic-container"></div><span class="badge">${num}</span>
-
+                      <div class="topic-container"></div>
                       <div class="advice-container">
                         <section class="comments-section">
                           <h1>Give Advice</h1>
