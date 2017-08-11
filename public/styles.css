@@ -11,15 +11,6 @@ a {
   color: #383661;
 }
 
-#create {
-  margin-top: 40px;
-  width: 20%;
-  background: #F3C677;
-  color: #383661;
-  font-weight: bolder;
-  font-size: 22px;
-}
-
 #post-container {
 height: 300px;
 width: 70%;
@@ -46,12 +37,12 @@ text-align: center;
   margin: none;
 }
 
-ul li{
+/* ul li{
   list-style: none;
   width: 70%;
   margin: 0;
   padding: 0;
-}
+} */
 
 li {
   height: 60px;
@@ -116,7 +107,11 @@ li {
 
   #create {
     margin-top: 40px;
-    width: 35%;
+    width: 20%;
+    background: #F3C677;
+    color: #383661;
+    font-weight: bolder;
+    font-size: 22px;
   }
 }
 
@@ -142,9 +137,43 @@ li {
 
   #create {
     margin-top: 40px;
-    width: 35%;
+    width: 20%;
+    background: #F3C677;
+    color: #383661;
+    font-weight: bolder;
+    font-size: 22px;
   }
 }
+
+/*===Desktop view===*/
+@media screen and (min-width: 800px) {
+  
+    h1 {
+      font-size: 24px;
+    }
+  
+    h1,
+    h3 {
+      text-align: center;
+    }
+  
+    ul li {
+      width: 50%;
+      font-size: 20px;
+      height: 50px;
+      padding-bottom: 5px;
+      opacity: .8;
+    }
+  
+    #create {
+      margin-top: 40px;
+      width: 20%;
+      background: #F3C677;
+      color: #383661;
+      font-weight: bolder;
+      font-size: 22px;
+    }
+  }
 
 
 
